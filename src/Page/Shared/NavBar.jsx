@@ -1,8 +1,17 @@
 import { Stethoscope } from "lucide-react";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import AuthContext from "../../providers/AuthContext";
 
 const NavBar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
+
   const navOptions = (
     <>
       <li>
@@ -22,14 +31,25 @@ const NavBar = () => {
           Available Camps
         </Link>
       </li>
-      <li>
-        <Link
-          to="/join-us"
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-        >
-          Join Us
-        </Link>
-      </li>
+
+      {user ? (
+        <>
+          <button onClick={handleLogOut} className="btn btn-ghost">
+            LogOut
+          </button>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link
+              to="/join-us"
+              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+            >
+              Join Us
+            </Link>
+          </li>
+        </>
+      )}
     </>
   );
 
