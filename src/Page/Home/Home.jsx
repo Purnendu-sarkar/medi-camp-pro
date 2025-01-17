@@ -2,7 +2,7 @@ import React from "react";
 
 const Home = () => {
   return (
-    <div>
+    <div className="pt-20">
       <h1>Welcome to Medi Camp</h1>
       <p>
         Your health is our priority. Explore our services and get the best
