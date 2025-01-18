@@ -4,9 +4,11 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
   const {
@@ -24,17 +26,27 @@ const SignUp = () => {
       console.log(result.user);
       updateUserProfile(data.name, data.photoURL).then(() => {
         console.log("user profile info updated");
-        reset();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "User created successfully.",
-          showConfirmButton: false,
-          timer: 1500,
+        //Create user entry in the database
+        const userInfo = {
+          name: data.name,
+          email: data.email,
+        };
+
+        axiosPublic.post("/users", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            console.log("User Added to the database");
+            reset();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "User created successfully.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/");
+          }
         });
       });
-
-      navigate("/");
     } catch (error) {
       console.error("Sign up failed:", error);
     } finally {
