@@ -1,11 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import AuthContext from "../../providers/AuthContext";
+// import AuthContext from "../../providers/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const SignUp = () => {
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useAuth();
   const navigate = useNavigate();
 
   const {

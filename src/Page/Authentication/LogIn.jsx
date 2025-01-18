@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import AuthContext from "../../providers/AuthContext";
+// import AuthContext from "../../providers/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const LogIn = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 

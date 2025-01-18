@@ -1,10 +1,11 @@
 import { Stethoscope } from "lucide-react";
-import React, { useContext } from "react";
+// import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import AuthContext from "../../providers/AuthContext";
+// import AuthContext from "../../providers/AuthContext";
+import useAuth from "../../hooks/useAuth";
 
 const NavBar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut } = useAuth();
 
   const handleLogOut = () => {
     logOut()
