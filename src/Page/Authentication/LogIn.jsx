@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import SocialLogin from "./SocialLogin";
 
 const LogIn = () => {
   const { signIn } = useAuth();
@@ -101,11 +102,14 @@ const LogIn = () => {
             </div>
           </form>
 
-          <p className="text-center mt-4">
+          <p className="text-center mt-1">
             <small>
               New Here? <Link to="/signUp">Create an account</Link>
             </small>
           </p>
+          <div className="p-5">
+            <SocialLogin></SocialLogin>
+          </div>
         </div>
       </div>
     </div>

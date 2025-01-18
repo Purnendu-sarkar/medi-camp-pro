@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 // import AuthContext from "../../providers/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SocialLogin from "./SocialLogin";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -163,6 +164,14 @@ const SignUp = () => {
               />
             </div>
           </form>
+          <p className="text-center mt-1">
+            <small>
+              Already have an account? <Link to="/join-us">Join Us</Link>
+            </small>
+          </p>
+          <div className="p-5">
+            <SocialLogin></SocialLogin>
+          </div>
         </div>
       </div>
     </div>
