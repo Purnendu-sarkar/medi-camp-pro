@@ -11,10 +11,10 @@ import {
 } from "lucide-react";
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
-  
-  const isAdmin = false;
+  const [isAdmin] = useAdmin();
   return (
     <>
       <div className="min-h-screen flex">
