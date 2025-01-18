@@ -1,9 +1,13 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import AuthContext from "../../providers/AuthContext";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -16,6 +20,14 @@ const SignUp = () => {
     try {
       const result = await createUser(data.email, data.password);
       console.log(result.user);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "User created successfully.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/");
     } catch (error) {
       console.error("Sign up failed:", error);
     } finally {

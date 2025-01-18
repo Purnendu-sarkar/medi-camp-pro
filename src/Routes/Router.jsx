@@ -4,6 +4,7 @@ import Home from "../Page/Home/Home";
 import AvailableCamps from "../Page/AvailableCamps/AvailableCamps";
 import LogIn from "../Page/Authentication/LogIn";
 import SignUp from "../Page/Authentication/SignUp";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -16,7 +17,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/available-camps",
-        element: <AvailableCamps></AvailableCamps>,
+        element: (
+          <PrivateRoute>
+            <AvailableCamps></AvailableCamps>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/join-us",
