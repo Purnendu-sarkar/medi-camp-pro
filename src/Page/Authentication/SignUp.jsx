@@ -5,12 +5,13 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const [loading, setLoading] = useState(false);
@@ -20,13 +21,18 @@ const SignUp = () => {
     try {
       const result = await createUser(data.email, data.password);
       console.log(result.user);
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "User created successfully.",
-        showConfirmButton: false,
-        timer: 1500,
+      updateUserProfile(data.name, data.photoURL).then(() => {
+        console.log("user profile info updated");
+        reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "User created successfully.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
+
       navigate("/");
     } catch (error) {
       console.error("Sign up failed:", error);
@@ -62,6 +68,22 @@ const SignUp = () => {
                 <span className="text-red-600">Please provide your name</span>
               )}
             </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Photo URL</span>
+              </label>
+              <input
+                type="text"
+                {...register("photoURL", { required: true })}
+                placeholder="Photo URL"
+                className="input input-bordered"
+              />
+              {errors.photoURL && (
+                <span className="text-red-600">Photo URL is required</span>
+              )}
+            </div>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
