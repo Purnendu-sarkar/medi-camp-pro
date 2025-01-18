@@ -5,6 +5,7 @@ import AvailableCamps from "../Page/AvailableCamps/AvailableCamps";
 import LogIn from "../Page/Authentication/LogIn";
 import SignUp from "../Page/Authentication/SignUp";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../Layout/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -32,5 +33,12 @@ export const router = createBrowserRouter([
         element: <SignUp></SignUp>,
       },
     ],
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      
+    ]
   },
 ]);
