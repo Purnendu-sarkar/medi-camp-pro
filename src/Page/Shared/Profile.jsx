@@ -3,12 +3,14 @@ import useAuth from "../../hooks/useAuth";
 import coverImg from "../../assets/cover.jpg";
 import useAdmin from "../../hooks/useAdmin";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [profileData, setProfileData] = useState(null);
   const [isAdmin] = useAdmin();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -24,6 +26,10 @@ const Profile = () => {
       fetchProfile();
     }
   }, [user, axiosSecure]);
+
+  const handleUpdateProfile = () => {
+    navigate("/dashboard/updateProfile", { state: { profileData } });
+  };
 
   if (!profileData) {
     return (
@@ -98,7 +104,10 @@ const Profile = () => {
         </div>
         {/* Buttons */}
         <div className="mt-8 mb-4 flex justify-center gap-4">
-          <button className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 shadow-md">
+          <button
+            onClick={handleUpdateProfile}
+            className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 shadow-md"
+          >
             Update Profile
           </button>
           <button className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 shadow-md">
