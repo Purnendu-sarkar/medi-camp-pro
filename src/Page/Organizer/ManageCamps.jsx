@@ -1,9 +1,37 @@
 import React from "react";
 import useCamps from "../../hooks/useCamps";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const ManageCamps = () => {
   const [camps, loading, refetch] = useCamps();
+  const axiosSecure = useAxiosSecure();
+
+  const handleDelete = (camp) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.delete(`/camps/${camp._id}`);
+        if (res.data.deletedCount > 0) {
+          refetch();
+          Swal.fire({
+            icon: "success",
+            title: `${camp?.campName} has been deleted`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      }
+    });
+  };
 
   if (loading) {
     return (
@@ -54,7 +82,10 @@ const ManageCamps = () => {
                   <button className="text-blue-500 hover:text-blue-700">
                     <FaEdit className="w-full  h-full" />
                   </button>
-                  <button className="text-red-500 hover:text-red-700">
+                  <button
+                    onClick={() => handleDelete(camp)}
+                    className="text-red-500 hover:text-red-700"
+                  >
                     <FaTrash className="w-full h-full" />
                   </button>
                 </td>
