@@ -1,20 +1,26 @@
+import React from "react";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { useNavigate } from "react-router-dom";
 
 // Image Hosting API Key
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-const AddCamp = () => {
+const UpdateCamp = () => {
   const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+    _id,
+    campName,
+    image,
+    fees,
+    date,
+    location,
+    healthcareProfessional,
+    description,
+  } = useLoaderData();
+  const { register, handleSubmit, reset } = useForm();
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
@@ -31,24 +37,22 @@ const AddCamp = () => {
         const imageUrl = res.data.data.display_url;
 
         // Prepare data to save in the database
-        const newCamp = {
+        const updatedCamp = {
           campName: data.campName,
           image: imageUrl,
           fees: parseFloat(data.fees),
           date: data.date,
           location: data.location,
           healthcareProfessional: data.healthcareProfessional,
-          participantCount: 0,
           description: data.description,
         };
 
-        // API call to save the camp
-        const response = await axiosSecure.post("/camps", newCamp);
-        if (response.data.insertedId) {
-          reset();
+        // API call to update the camp
+        const response = await axiosSecure.patch(`/camps/${_id}`, updatedCamp);
+        if (response.data.modifiedCount > 0) {
           Swal.fire({
             icon: "success",
-            title: "Camp added successfully!",
+            title: `${camp?.campName} updated successfully!`,
             showConfirmButton: false,
             timer: 1500,
           });
@@ -62,7 +66,7 @@ const AddCamp = () => {
         });
       }
     } catch (error) {
-      console.error("Error adding camp:", error);
+      console.error("Error updating camp:", error);
       Swal.fire({
         icon: "error",
         title: "Error",
@@ -72,8 +76,8 @@ const AddCamp = () => {
   };
 
   return (
-    <div className="container mx-auto h-screen p-8 bg-gray-100 rounded shadow">
-      <h2 className="text-3xl font-bold mb-6 text-center">Add New Camp</h2>
+    <div className="container mx-auto p-8 bg-gray-100 rounded shadow">
+      <h2 className="text-3xl font-bold mb-6 text-center">Update Camp</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid md:grid-cols-2 gap-5 items-center justify-center">
           <div className="form-control">
@@ -81,12 +85,10 @@ const AddCamp = () => {
             <input
               type="text"
               placeholder="Enter the camp name."
+              defaultValue={campName}
               {...register("campName", { required: "Camp Name is required" })}
               className="input input-bordered"
             />
-            {errors.campName && (
-              <p className="text-red-500">{errors.campName.message}</p>
-            )}
           </div>
           <div className="form-control">
             <label className="label">Image*</label>
@@ -96,77 +98,64 @@ const AddCamp = () => {
               {...register("image", { required: "Image is required" })}
               className="file-input"
             />
-            {errors.image && (
-              <p className="text-red-500">{errors.image.message}</p>
-            )}
           </div>
           <div className="form-control">
             <label className="label">Camp Fees*</label>
             <input
               type="number"
               placeholder="Enter the camp fees."
+              defaultValue={fees}
               {...register("fees", { required: "Fees is required" })}
               className="input input-bordered"
             />
-            {errors.fees && (
-              <p className="text-red-500">{errors.fees.message}</p>
-            )}
           </div>
           <div className="form-control">
             <label className="label">Date & Time*</label>
             <input
               type="datetime-local"
-              placeholder="Enter the camp date and time"
+              defaultValue={date}
               {...register("date", { required: "Date & Time is required" })}
               className="input input-bordered"
             />
-            {errors.date && (
-              <p className="text-red-500">{errors.date.message}</p>
-            )}
           </div>
           <div className="form-control">
             <label className="label">Location*</label>
             <input
               type="text"
+              defaultValue={location}
               placeholder="Enter the camp location."
               {...register("location", { required: "Location is required" })}
               className="input input-bordered"
             />
-            {errors.location && (
-              <p className="text-red-500">{errors.location.message}</p>
-            )}
           </div>
           <div className="form-control">
             <label className="label">Healthcare Professional Name*</label>
             <input
               type="text"
+              defaultValue={healthcareProfessional}
               placeholder="Enter the healthcare professional's name."
               {...register("healthcareProfessional", {
                 required: "Healthcare Professional Name is required",
               })}
               className="input input-bordered"
             />
-            {errors.healthcareProfessional && (
-              <p className="text-red-500">
-                {errors.healthcareProfessional.message}
-              </p>
-            )}
           </div>
         </div>
         <div className="form-control">
           <label className="label">Description</label>
           <textarea
+            defaultValue={description}
             placeholder="Write a brief description about the camp (optional)"
             {...register("description")}
             className="textarea textarea-bordered"
           ></textarea>
         </div>
         <button type="submit" className="btn btn-primary w-full">
-          Add Camp
+          Update Camp
         </button>
       </form>
     </div>
   );
 };
 
-export default AddCamp;
+export default UpdateCamp;

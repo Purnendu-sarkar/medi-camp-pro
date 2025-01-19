@@ -3,6 +3,7 @@ import useCamps from "../../hooks/useCamps";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const ManageCamps = () => {
   const [camps, loading, refetch] = useCamps();
@@ -79,9 +80,11 @@ const ManageCamps = () => {
                   {camp?.healthcareProfessional}
                 </td>
                 <td className="border border-gray-300 p-2 w-10 mx-auto justify-center space-x-4">
-                  <button className="text-blue-500 hover:text-blue-700">
-                    <FaEdit className="w-full  h-full" />
-                  </button>
+                  <Link to={`/dashboard/updateCamp/${camp._id}`}>
+                    <button className="text-blue-500 hover:text-blue-700">
+                      <FaEdit className="w-full  h-full" />
+                    </button>
+                  </Link>
                   <button
                     onClick={() => handleDelete(camp)}
                     className="text-red-500 hover:text-red-700"
