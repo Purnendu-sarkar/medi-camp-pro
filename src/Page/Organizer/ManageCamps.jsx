@@ -4,6 +4,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const ManageCamps = () => {
   const [camps, loading, refetch] = useCamps();
@@ -74,7 +75,10 @@ const ManageCamps = () => {
                   {index + 1}
                 </td>
                 <td className="border border-gray-300 p-2">{camp?.campName}</td>
-                <td className="border border-gray-300 p-2">{camp?.date}</td>
+                <td className="border border-gray-300 p-2">
+                  {/* Formatting date and time */}
+                  {moment(camp?.date).format("DD/MM/YYYY HH:mm")}
+                </td>
                 <td className="border border-gray-300 p-2">{camp?.location}</td>
                 <td className="border border-gray-300 p-2">
                   {camp?.healthcareProfessional}
