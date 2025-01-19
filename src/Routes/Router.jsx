@@ -9,6 +9,7 @@ import Dashboard from "../Layout/Dashboard";
 import Profile from "../Page/Shared/Profile";
 import AdminRoute from "./AdminRoute";
 import UpdateProfile from "../Page/Shared/UpdateProfile";
+import AddCamp from "../Page/Organizer/AddCamp";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +60,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <Profile></Profile>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/addCamp",
+        element: (
+          <AdminRoute>
+            <AddCamp></AddCamp>
           </AdminRoute>
         ),
       },
