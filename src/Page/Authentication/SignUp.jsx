@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-// import AuthContext from "../../providers/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
@@ -31,6 +30,8 @@ const SignUp = () => {
         const userInfo = {
           name: data.name,
           email: data.email,
+          img: data.img,
+          phoneNumber: data.phoneNumber,
           role: "admin",
         };
 
@@ -86,16 +87,39 @@ const SignUp = () => {
 
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Photo URL</span>
+                <span className="label-text">Phone Number</span>
+              </label>
+              <input
+                type="number"
+                {...register("phoneNumber", {
+                  required: true,
+                  pattern: /^[0-9]{10,15}$/,
+                })}
+                placeholder="Phone Number"
+                className="input input-bordered"
+              />
+              {errors.phoneNumber?.type === "required" && (
+                <p className="text-red-600">Phone number is required</p>
+              )}
+              {errors.phoneNumber?.type === "pattern" && (
+                <p className="text-red-600">
+                  Enter a valid phone number (10-15 digits)
+                </p>
+              )}
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Image URL</span>
               </label>
               <input
                 type="text"
-                {...register("photoURL", { required: true })}
-                placeholder="Photo URL"
+                {...register("img", { required: true })}
+                placeholder="Image URL"
                 className="input input-bordered"
               />
-              {errors.photoURL && (
-                <span className="text-red-600">Photo URL is required</span>
+              {errors.img && (
+                <span className="text-red-600">Image URL is required</span>
               )}
             </div>
 

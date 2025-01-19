@@ -6,6 +6,8 @@ import LogIn from "../Page/Authentication/LogIn";
 import SignUp from "../Page/Authentication/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
+import Profile from "../Page/Shared/Profile";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +43,21 @@ export const router = createBrowserRouter([
         <Dashboard></Dashboard>
       </PrivateRoute>
     ),
-    children: [],
+    children: [
+      //Admin Routes
+      {
+        path: "/dashboard/adminProfile",
+        element: (
+          <AdminRoute>
+            <Profile></Profile>
+          </AdminRoute>
+        ),
+      },
+      //
+      {
+        path: "/dashboard/userHome",
+        element: <Profile></Profile>,
+      },
+    ],
   },
 ]);
