@@ -10,6 +10,7 @@ import Profile from "../Page/Shared/Profile";
 import AdminRoute from "./AdminRoute";
 import UpdateProfile from "../Page/Shared/UpdateProfile";
 import AddCamp from "../Page/Organizer/AddCamp";
+import ManageCamps from "../Page/Organizer/ManageCamps";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AddCamp></AddCamp>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageCamp",
+        element: (
+          <AdminRoute>
+            <ManageCamps></ManageCamps>
           </AdminRoute>
         ),
       },
