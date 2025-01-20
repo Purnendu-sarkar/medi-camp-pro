@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Search, LayoutGrid, Layout } from "lucide-react";
+import CampCard from "../Shared/CampCard";
+import useCamps from "../../hooks/useCamps";
 
 const AvailableCamps = () => {
+  const [camps, loading, refetch] = useCamps();
   const [layout, setLayout] = useState("grid");
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("popular");
@@ -68,7 +71,9 @@ const AvailableCamps = () => {
             : "grid-cols-1"
         }`}
       >
-        {/* Camp cards will be populated here */}
+        {camps.map((camp) => (
+          <CampCard key={camp._id} camp={camp}></CampCard>
+        ))}
       </div>
     </div>
   );
