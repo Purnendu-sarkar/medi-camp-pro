@@ -11,8 +11,50 @@ const JoinModal = ({ camp, onClose }) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
+
+  const validateAge = (value) => {
+    if (value < 10) {
+      Swal.fire({
+        icon: "error",
+        title: "Invalid Age",
+        text: "Age must be 10 years or older.",
+      });
+      setValue("age", "");
+      return false;
+    }
+    return true;
+  };
+
+  const validatePhoneNumber = (value) => {
+    const phoneRegex = /^[0-9]{10,15}$/;
+    if (!phoneRegex.test(value)) {
+      Swal.fire({
+        icon: "error",
+        title: "Invalid Phone Number",
+        text: "Phone number must contain 10 to 15 digits only.",
+      });
+      setValue("phoneNumber", "");
+      return false;
+    }
+    return true;
+  };
+
+  const validateEmergencyContact = (value) => {
+    const phoneRegex = /^[0-9]{10,15}$/;
+    if (!phoneRegex.test(value)) {
+      Swal.fire({
+        icon: "error",
+        title: "Invalid Emergency Contact",
+        text: "Emergency contact must contain 10 to 15 digits only.",
+      });
+      setValue("emergencyContact", "");
+      return false;
+    }
+    return true;
+  };
 
   const onSubmit = async (data) => {
     const participantData = {
@@ -151,7 +193,8 @@ const JoinModal = ({ camp, onClose }) => {
               <input
                 type="number"
                 placeholder="Enter your age"
-                {...register("age", { required: "Age is required", min: 1 })}
+                {...register("age", { required: "Age is required" })}
+                onBlur={(e) => validateAge(e.target.value)}
                 className="w-full mt-1 border-gray-300 rounded-md p-2"
               />
               {errors.age && (
@@ -170,6 +213,7 @@ const JoinModal = ({ camp, onClose }) => {
                 {...register("phoneNumber", {
                   required: "Phone number is required",
                 })}
+                onBlur={(e) => validatePhoneNumber(e.target.value)}
                 className="w-full mt-1 border-gray-300 rounded-md p-2"
               />
               {errors.phoneNumber && (
@@ -207,6 +251,7 @@ const JoinModal = ({ camp, onClose }) => {
                 {...register("emergencyContact", {
                   required: "Emergency contact is required",
                 })}
+                onBlur={(e) => validateEmergencyContact(e.target.value)}
                 className="w-full mt-1 border-gray-300 rounded-md p-2"
               />
               {errors.emergencyContact && (
