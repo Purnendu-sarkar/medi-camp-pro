@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import {
   Calendar,
@@ -9,9 +9,15 @@ import {
   UsersRound,
 } from "lucide-react";
 import moment from "moment";
+import JoinModal from "./JoinModal";
 
 const CampDetails = () => {
   const camp = useLoaderData();
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleJoinCamp = () => {
+    setModalOpen(true);
+  };
 
   return (
     <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden border border-gray-300 mt-8 p-6">
@@ -77,9 +83,16 @@ const CampDetails = () => {
       <p className="text-gray-700 mb-6">{camp.description}</p>
 
       {/* Join Button */}
-      <button className="bg-blue-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-600 transition">
+      <button
+        onClick={handleJoinCamp}
+        className="bg-blue-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-600 transition"
+      >
         Join Camp
       </button>
+
+      {isModalOpen && (
+        <JoinModal camp={camp} onClose={() => setModalOpen(false)}></JoinModal>
+      )}
     </div>
   );
 };
