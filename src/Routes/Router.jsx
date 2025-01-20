@@ -12,6 +12,7 @@ import UpdateProfile from "../Page/Shared/UpdateProfile";
 import AddCamp from "../Page/Organizer/AddCamp";
 import ManageCamps from "../Page/Organizer/ManageCamps";
 import UpdateCamp from "../Page/Organizer/UpdateCamp";
+import CampDetails from "../Page/Shared/CampDetails";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,18 @@ export const router = createBrowserRouter([
             <AvailableCamps></AvailableCamps>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/camp-details/:campId",
+        element: (
+          <PrivateRoute>
+            <CampDetails></CampDetails>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/camps/${params.campId}`).then((res) =>
+            res.json()
+          ),
       },
       {
         path: "/join-us",

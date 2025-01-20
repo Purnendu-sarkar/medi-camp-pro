@@ -8,6 +8,7 @@ import {
   DollarSign,
   UsersRound,
 } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 const CampCard = ({ camp }) => {
   return (
@@ -93,10 +94,13 @@ const CampCard = ({ camp }) => {
       </div>
 
       {/* Join Button */}
+
       <div className="mt-auto p-5">
-        <button className="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition">
-          Join Now
-        </button>
+        <NavLink to={`/camp-details/${camp._id}`}>
+          <button className="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition">
+            Join Now
+          </button>
+        </NavLink>
       </div>
     </div>
   );
