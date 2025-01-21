@@ -1,8 +1,14 @@
 import React from "react";
 import useRegisteredCamps from "../../hooks/useRegisteredCamps";
+import { useNavigate } from "react-router-dom";
 
 const RegisteredCamps = () => {
   const [registeredCamps, isLoading] = useRegisteredCamps();
+  const navigate = useNavigate();
+
+  const handlePayment = (camp) => {
+    navigate(`/dashboard/payment/${camp._id}`, { state: { camp } });
+  };
 
   const handleCancel = async (campId) => {
     console.log(campId);
@@ -72,9 +78,12 @@ const RegisteredCamps = () => {
                         Paid
                       </span>
                     ) : (
-                      <span className="px-2 py-1 text-red-600 bg-red-100 rounded-full">
-                        Unpaid
-                      </span>
+                      <button
+                        className="px-3 py-1 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-300 transition"
+                        onClick={() => handlePayment(camp)}
+                      >
+                        Pay
+                      </button>
                     )}
                   </td>
                   <td className="p-4 text-gray-700">
