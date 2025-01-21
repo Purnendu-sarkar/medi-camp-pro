@@ -3,10 +3,12 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const JoinModal = ({ camp, onClose }) => {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -85,6 +87,7 @@ const JoinModal = ({ camp, onClose }) => {
           text: "Participant added to the camp!",
         });
         onClose();
+        navigate("/available-camps")
       }
     } catch (error) {
       console.error("Registration failed:", error);

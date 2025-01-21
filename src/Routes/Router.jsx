@@ -13,6 +13,7 @@ import AddCamp from "../Page/Organizer/AddCamp";
 import ManageCamps from "../Page/Organizer/ManageCamps";
 import UpdateCamp from "../Page/Organizer/UpdateCamp";
 import CampDetails from "../Page/Shared/CampDetails";
+import RegisteredCamps from "../Page/Participant/RegisteredCamps";
 
 export const router = createBrowserRouter([
   {
@@ -104,10 +105,18 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:5000/camps/${params.id}`),
       },
-      //
+      //Participant Rotues
       {
         path: "/dashboard/userHome",
         element: <Profile></Profile>,
+      },
+      {
+        path: "/dashboard/cart",
+        element: (
+          <PrivateRoute>
+            <RegisteredCamps></RegisteredCamps>
+          </PrivateRoute>
+        ),
       },
     ],
   },
