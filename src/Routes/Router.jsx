@@ -15,6 +15,7 @@ import UpdateCamp from "../Page/Organizer/UpdateCamp";
 import CampDetails from "../Page/Shared/CampDetails";
 import RegisteredCamps from "../Page/Participant/RegisteredCamps";
 import PaymentPage from "../Page/Participant/PaymentPage";
+import ManageRegisteredCamps from "../Page/Organizer/ManageRegisteredCamps";
 
 export const router = createBrowserRouter([
   {
@@ -105,6 +106,14 @@ export const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/camps/${params.id}`),
+      },
+      {
+        path: "/dashboard/registeredCamps",
+        element: (
+          <AdminRoute>
+            <ManageRegisteredCamps></ManageRegisteredCamps>
+          </AdminRoute>
+        ),
       },
       //Participant Rotues
       {
