@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const PaymentPage = () => {
   const location = useLocation();
@@ -35,9 +35,11 @@ const PaymentPage = () => {
             </span>
           </p>
         </div>
-        <button className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 transition duration-200">
-          Proceed to Payment
-        </button>
+        <Link to="/dashboard/payment" state={{ camp }}>
+          <button className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 transition duration-200">
+            Proceed to Payment
+          </button>
+        </Link>
       </div>
       <div className="mt-6">
         <button
