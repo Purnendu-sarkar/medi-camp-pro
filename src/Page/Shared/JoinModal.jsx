@@ -60,6 +60,7 @@ const JoinModal = ({ camp, onClose }) => {
 
   const onSubmit = async (data) => {
     const participantData = {
+      campId: camp._id,
       campName: camp.campName,
       fees: camp.fees,
       location: camp.location,
@@ -87,7 +88,7 @@ const JoinModal = ({ camp, onClose }) => {
           text: "Participant added to the camp!",
         });
         onClose();
-        navigate("/available-camps")
+        navigate("/available-camps");
       }
     } catch (error) {
       console.error("Registration failed:", error);

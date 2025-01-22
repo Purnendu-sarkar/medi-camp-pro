@@ -28,7 +28,36 @@ const ManageRegisteredCamps = () => {
   };
 
   const handleCancel = async (registrationId) => {
-    console.log(registrationId);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, cancel it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosSecure.delete(
+            `/participants/${registrationId}`
+          );
+          if (res.data.deletedCount > 0) {
+            Swal.fire(
+              "Cancelled!",
+              "The registration has been cancelled.",
+              "success"
+            );
+            refetch();
+          } else {
+            Swal.fire("Error!", "Unable to cancel the registration.", "error");
+          }
+        } catch (error) {
+          console.error("Error cancelling registration:", error);
+          Swal.fire("Error!", "Something went wrong. Try again.", "error");
+        }
+      }
+    });
   };
 
   if (loading) {
@@ -107,7 +136,12 @@ const ManageRegisteredCamps = () => {
                   <td className="px-4 py-2 border">
                     <button
                       onClick={() => handleCancel(camp._id)}
-                      className="px-4 py-2 text-white bg-red-500 hover:bg-red-600 rounded"
+                      className={`px-4 py-2 text-white ${
+                        camp.paymentStatus || camp.paymentConfirmation
+                          ? "bg-gray-300 cursor-not-allowed"
+                          : "bg-red-500 hover:bg-red-600"
+                      } rounded`}
+                      disabled={camp.paymentStatus || camp.paymentConfirmation}
                     >
                       Cancel
                     </button>
