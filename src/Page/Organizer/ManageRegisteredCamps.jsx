@@ -1,8 +1,31 @@
 import React from "react";
 import useManageRegisteredCamps from "../../hooks/useManageRegisteredCamps";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const ManageRegisteredCamps = () => {
-  const [registeredCamps, loading] = useManageRegisteredCamps();
+  const [registeredCamps, loading, refetch] = useManageRegisteredCamps();
+  const axiosSecure = useAxiosSecure();
+
+  const handleConfirmation = async (registrationId) => {
+    try {
+      const res = await axiosSecure.patch(`/participants/${registrationId}`, {
+        confirmationStatus: true,
+      });
+      if (res.data.modifiedCount > 0) {
+        Swal.fire({
+          icon: "success",
+          title: "Confirmation Success",
+          text: "Confirmation status updated successfully!",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        refetch();
+      }
+    } catch (error) {
+      console.error("Error updating confirmation status:", error);
+    }
+  };
 
   const handleCancel = async (registrationId) => {
     console.log(registrationId);
@@ -58,12 +81,29 @@ const ManageRegisteredCamps = () => {
                           : "bg-red-200 text-red-800"
                       }`}
                     >
-                      {camp.paymentStatus ? "Paid" : "Pending"}
+                      {camp.paymentStatus ? "Paid" : "Unpaid"}
                     </span>
                   </td>
                   <td className="px-4 py-2 border">
-                    {camp.paymentConfirmed ? "Confirmed" : "Not Confirmed"}
+                    <button
+                      onClick={() => handleConfirmation(camp._id)}
+                      className={`px-4 py-1 text-xs font-semibold rounded ${
+                        camp.paymentConfirmation
+                          ? "bg-green-200 text-green-800 cursor-not-allowed"
+                          : camp.paymentStatus
+                          ? "bg-yellow-200 text-yellow-800 hover:bg-yellow-300"
+                          : "bg-gray-200 text-gray-800 cursor-not-allowed"
+                      }`}
+                      disabled={camp.paymentConfirmation || !camp.paymentStatus}
+                    >
+                      {camp.paymentConfirmation
+                        ? "Confirmed"
+                        : camp.paymentStatus
+                        ? "Pending"
+                        : "Not Confirmed"}
+                    </button>
                   </td>
+
                   <td className="px-4 py-2 border">
                     <button
                       onClick={() => handleCancel(camp._id)}
