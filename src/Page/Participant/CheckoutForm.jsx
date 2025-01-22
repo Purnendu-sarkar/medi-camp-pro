@@ -87,7 +87,8 @@ const CheckoutForm = ({ camp }) => {
           name: user?.displayName,
           campId: camp._id,
           campName: camp.campName,
-          amount: camp.fees,
+          fees: camp.fees,
+          paymentStatus: "paid",
           date: new Date(),
         };
 

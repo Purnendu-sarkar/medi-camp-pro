@@ -95,7 +95,7 @@ const Dashboard = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="/dashboard/review"
+                      to="/dashboard/paymentHistory"
                       className={`flex gap-1 items-center space-x-2 py-2 px-4 rounded-lg bg-blue-600 hover:bg-gray-800`}
                     >
                       <History className="w-5 h-5" />
