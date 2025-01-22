@@ -51,80 +51,91 @@ const PaymentHistory = () => {
       <h2 className="text-3xl font-extrabold mb-6 text-center text-blue-600">
         Payment History
       </h2>
-      <div className="overflow-x-auto shadow-md rounded-lg">
-        <table className="table-auto w-full border-collapse border border-gray-200 bg-white">
-          <thead>
-            <tr className="bg-blue-500 text-white">
-              <th className="border border-gray-200 p-3 text-left">
-                Camp Name
-              </th>
-              <th className="border border-gray-200 p-3 text-left">Fees</th>
-              <th className="border border-gray-200 p-3 text-left">
-                Payment Status
-              </th>
-              <th className="border border-gray-200 p-3 text-left">
-                Payment Confirmation
-              </th>
-              <th className="border border-gray-200 p-3 text-left">
-                Transaction ID
-              </th>
-              <th className="border border-gray-200 p-3 text-left">Date</th>
-              <th className="border border-gray-200 p-3 text-left">Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedPaymentHistory.map((payment, index) => {
-              const paymentDate = new Date(payment.date);
-              return (
-                <tr
-                  key={index}
-                  className={`${
-                    index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                  } hover:bg-gray-100`}
-                >
-                  <td className="border border-gray-200 p-3">
-                    {payment.campName}
-                  </td>
-                  <td className="border border-gray-200 p-3">
-                    ${payment.fees.toFixed(2)}
-                  </td>
-                  <td className="border border-gray-200 p-3 capitalize">
-                    <span
-                      className={`px-3 py-1 text-xs font-semibold rounded-full ${
-                        payment?.paymentStatus === "paid"
-                          ? "bg-green-100 text-green-600"
-                          : "bg-red-100 text-red-600"
-                      }`}
-                    >
-                      {payment?.paymentStatus}
-                    </span>
-                  </td>
-                  <td className="border border-gray-200 p-3">
-                    {payment.paymentConfirmation ? (
-                      <span className="px-3 py-1 text-xs font-semibold bg-green-100 text-green-600 rounded-full">
-                        Confirmed
+
+      {paymentHistory.length === 0 ? (
+        <div className="flex flex-col items-center justify-center h-screen text-gray-600">
+          <h2 className="text-2xl font-bold mb-4">No Payment History Found</h2>
+          <p className="text-lg text-center">
+            It looks like you don't have any payment records yet. Once you make
+            a payment, it will appear here.
+          </p>
+        </div>
+      ) : (
+        <div className="overflow-x-auto shadow-md rounded-lg">
+          <table className="table-auto w-full border-collapse border border-gray-200 bg-white">
+            <thead>
+              <tr className="bg-blue-500 text-white">
+                <th className="border border-gray-200 p-3 text-left">
+                  Camp Name
+                </th>
+                <th className="border border-gray-200 p-3 text-left">Fees</th>
+                <th className="border border-gray-200 p-3 text-left">
+                  Payment Status
+                </th>
+                <th className="border border-gray-200 p-3 text-left">
+                  Payment Confirmation
+                </th>
+                <th className="border border-gray-200 p-3 text-left">
+                  Transaction ID
+                </th>
+                <th className="border border-gray-200 p-3 text-left">Date</th>
+                <th className="border border-gray-200 p-3 text-left">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sortedPaymentHistory.map((payment, index) => {
+                const paymentDate = new Date(payment.date);
+                return (
+                  <tr
+                    key={index}
+                    className={`${
+                      index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                    } hover:bg-gray-100`}
+                  >
+                    <td className="border border-gray-200 p-3">
+                      {payment.campName}
+                    </td>
+                    <td className="border border-gray-200 p-3">
+                      ${payment.fees.toFixed(2)}
+                    </td>
+                    <td className="border border-gray-200 p-3 capitalize">
+                      <span
+                        className={`px-3 py-1 text-xs font-semibold rounded-full ${
+                          payment?.paymentStatus === "paid"
+                            ? "bg-green-100 text-green-600"
+                            : "bg-red-100 text-red-600"
+                        }`}
+                      >
+                        {payment?.paymentStatus}
                       </span>
-                    ) : (
-                      <span className="px-3 py-1 text-xs font-semibold bg-yellow-100 text-yellow-600 rounded-full">
-                        Pending
-                      </span>
-                    )}
-                  </td>
-                  <td className="border border-gray-200 p-3">
-                    {payment.transactionId || "N/A"}
-                  </td>
-                  <td className="border border-gray-200 p-3">
-                    {paymentDate.toLocaleDateString()}{" "}
-                  </td>
-                  <td className="border border-gray-200 p-3">
-                    {paymentDate.toLocaleTimeString()}{" "}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+                    </td>
+                    <td className="border border-gray-200 p-3">
+                      {payment.paymentConfirmation ? (
+                        <span className="px-3 py-1 text-xs font-semibold bg-green-100 text-green-600 rounded-full">
+                          Confirmed
+                        </span>
+                      ) : (
+                        <span className="px-3 py-1 text-xs font-semibold bg-yellow-100 text-yellow-600 rounded-full">
+                          Pending
+                        </span>
+                      )}
+                    </td>
+                    <td className="border border-gray-200 p-3">
+                      {payment.transactionId || "N/A"}
+                    </td>
+                    <td className="border border-gray-200 p-3">
+                      {paymentDate.toLocaleDateString()}{" "}
+                    </td>
+                    <td className="border border-gray-200 p-3">
+                      {paymentDate.toLocaleTimeString()}{" "}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
