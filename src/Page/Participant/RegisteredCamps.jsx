@@ -1,19 +1,49 @@
 import React from "react";
 import useRegisteredCamps from "../../hooks/useRegisteredCamps";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const RegisteredCamps = () => {
-  const [registeredCamps, isLoading] = useRegisteredCamps();
+  const [registeredCamps, isLoading, refetch] = useRegisteredCamps();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   const handlePayment = (camp) => {
     navigate(`/dashboard/payment/${camp._id}`, { state: { camp } });
   };
 
+  // Handle camp cancellation
   const handleCancel = async (campId) => {
-    console.log(campId);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, cancel it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosSecure.delete(`/participants/${campId}`);
+          if (res.data.deletedCount > 0) {
+            Swal.fire(
+              "Cancelled!",
+              "Your registration has been successfully cancelled.",
+              "success"
+            );
+            refetch();
+          } else {
+            Swal.fire("Error!", "Unable to cancel registration.", "error");
+          }
+        } catch (error) {
+          console.error("Error cancelling registration:", error);
+          Swal.fire("Error!", "Something went wrong. Try again.", "error");
+        }
+      }
+    });
   };
-
   const handleFeedback = (campName) => {
     console.log(campName);
   };
@@ -99,8 +129,13 @@ const RegisteredCamps = () => {
                   </td>
                   <td className="p-4 text-center">
                     <button
-                      className="px-3 py-1 bg-red-500 text-white text-sm rounded-lg hover:bg-red-600 transition"
                       onClick={() => handleCancel(camp._id)}
+                      className={`px-4 py-2 text-white rounded ${
+                        camp.paymentStatus || camp.paymentConfirmation
+                          ? "bg-gray-300 cursor-not-allowed"
+                          : "bg-red-500 hover:bg-red-600"
+                      }`}
+                      disabled={camp.paymentStatus || camp.paymentConfirmation}
                     >
                       Cancel
                     </button>
