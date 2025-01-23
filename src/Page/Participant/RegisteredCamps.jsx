@@ -44,8 +44,10 @@ const RegisteredCamps = () => {
       }
     });
   };
-  const handleFeedback = (campName) => {
-    console.log(campName);
+
+  // Handle camp feedback
+  const handleFeedback = (camp) => {
+    navigate("/dashboard/feedback", { state: { camp } });
   };
 
   if (isLoading) {
@@ -141,12 +143,16 @@ const RegisteredCamps = () => {
                     </button>
                   </td>
                   <td className="p-4 text-center">
-                    <button
-                      className="px-3 py-1 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition"
-                      onClick={() => handleFeedback(camp.campName)}
-                    >
-                      Feedback
-                    </button>
+                    {camp.paymentConfirmation ? (
+                      <button
+                        className="px-3 py-1 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition"
+                        onClick={() => handleFeedback(camp)}
+                      >
+                        Feedback
+                      </button>
+                    ) : (
+                      <span className="px-2 py-1 text-gray-400">Wait!....</span>
+                    )}
                   </td>
                 </tr>
               ))}

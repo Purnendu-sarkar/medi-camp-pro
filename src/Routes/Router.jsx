@@ -18,6 +18,7 @@ import PaymentPage from "../Page/Participant/PaymentPage";
 import ManageRegisteredCamps from "../Page/Organizer/ManageRegisteredCamps";
 import Payment from "../Page/Participant/Payment";
 import PaymentHistory from "../Page/Participant/PaymentHistory";
+import FeedbackModal from "../Page/Participant/FeedbackModal";
 
 export const router = createBrowserRouter([
   {
@@ -151,6 +152,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <PaymentHistory></PaymentHistory>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/feedback",
+        element: (
+          <PrivateRoute>
+            <FeedbackModal></FeedbackModal>
           </PrivateRoute>
         ),
       },
