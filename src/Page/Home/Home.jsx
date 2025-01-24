@@ -2,6 +2,7 @@ import React from "react";
 import CampCard from "../Shared/CampCard";
 import useCamps from "../../hooks/useCamps";
 import Feedback from "./Feedback";
+import Banner from "./Banner";
 
 const Home = () => {
   const [camps, loading, refetch] = useCamps();
@@ -10,6 +11,7 @@ const Home = () => {
     .slice(0, 6);
   return (
     <div className="">
+      <Banner></Banner>
       <div className="max-w-7xl mx-auto px-4 py-8 p-6">
         <h1 className="text-2xl font-bold text-center mb-10">
           Popular Medical Camps
