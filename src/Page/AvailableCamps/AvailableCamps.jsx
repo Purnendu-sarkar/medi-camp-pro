@@ -13,6 +13,9 @@ const AvailableCamps = () => {
     (camp) =>
       camp.campName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       camp.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      camp.healthcareProfessional
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
       camp.date.includes(searchTerm)
   );
 
