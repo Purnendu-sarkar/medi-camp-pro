@@ -30,7 +30,7 @@ const SignUp = () => {
         const userInfo = {
           name: data.name,
           email: data.email,
-          img: data.img,
+          img: data.photoURL,
           phoneNumber: data.phoneNumber,
           role: "admin",
         };
@@ -114,11 +114,11 @@ const SignUp = () => {
               </label>
               <input
                 type="text"
-                {...register("img", { required: true })}
+                {...register("photoURL", { required: true })}
                 placeholder="Image URL"
                 className="input input-bordered"
               />
-              {errors.img && (
+              {errors.photoURL && (
                 <span className="text-red-600">Image URL is required</span>
               )}
             </div>
