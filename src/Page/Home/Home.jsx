@@ -1,6 +1,7 @@
 import React from "react";
 import CampCard from "../Shared/CampCard";
 import useCamps from "../../hooks/useCamps";
+import Feedback from "./Feedback";
 
 const Home = () => {
   const [camps, loading, refetch] = useCamps();
@@ -19,6 +20,8 @@ const Home = () => {
           ))}
         </div>
       </div>
+
+      <Feedback></Feedback>
     </div>
   );
 };
