@@ -19,6 +19,7 @@ import ManageRegisteredCamps from "../Page/Organizer/ManageRegisteredCamps";
 import Payment from "../Page/Participant/Payment";
 import PaymentHistory from "../Page/Participant/PaymentHistory";
 import FeedbackModal from "../Page/Participant/FeedbackModal";
+import Analytics from "../Page/Participant/Analytics";
 
 export const router = createBrowserRouter([
   {
@@ -122,6 +123,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/userHome",
         element: <Profile></Profile>,
+      },
+      {
+        path: "/dashboard/analytics",
+        element: <Analytics></Analytics>,
       },
       {
         path: "/dashboard/cart",
