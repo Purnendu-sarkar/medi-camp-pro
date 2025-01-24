@@ -4,10 +4,26 @@ import CampCard from "../Shared/CampCard";
 import useCamps from "../../hooks/useCamps";
 
 const AvailableCamps = () => {
-  const [camps, loading, refetch] = useCamps();
+  const [camps] = useCamps();
   const [layout, setLayout] = useState("grid");
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("popular");
+
+  const filteredCamps = camps.filter(
+    (camp) =>
+      camp.campName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      camp.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      camp.date.includes(searchTerm)
+  );
+
+  const sortedCamps = [...filteredCamps].sort((a, b) => {
+    if (sortBy === "popular") return b.participantCount - a.participantCount;
+    if (sortBy === "price-low") return a.fees - b.fees;
+    if (sortBy === "price-high") return b.fees - a.fees;
+    if (sortBy === "nameA") return a.campName.localeCompare(b.campName);
+    if (sortBy === "nameZ") return b.campName.localeCompare(a.campName);
+    return 0;
+  });
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -34,7 +50,8 @@ const AvailableCamps = () => {
             <option value="popular">Most Popular</option>
             <option value="price-low">Price: Low to High</option>
             <option value="price-high">Price: High to Low</option>
-            <option value="name">Name: A to Z</option>
+            <option value="nameA">Name: A to Z</option>
+            <option value="nameZ">Name: Z to A</option>
           </select>
 
           {/* Layout Toggle */}
@@ -68,10 +85,10 @@ const AvailableCamps = () => {
         className={`grid gap-6 ${
           layout === "grid"
             ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-            : "grid-cols-1"
+            : "grid-cols-1 md:grid-cols-2 "
         }`}
       >
-        {camps.map((camp) => (
+        {sortedCamps.map((camp) => (
           <CampCard key={camp._id} camp={camp}></CampCard>
         ))}
       </div>
