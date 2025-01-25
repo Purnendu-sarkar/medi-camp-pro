@@ -129,7 +129,7 @@ const ManageRegisteredCamps = () => {
                         ? "Confirmed"
                         : camp.paymentStatus
                         ? "Pending"
-                        : "Not Confirmed"}
+                        : "Pending"}
                     </button>
                   </td>
 
