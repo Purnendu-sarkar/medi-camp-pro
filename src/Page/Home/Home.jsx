@@ -3,6 +3,7 @@ import CampCard from "../Shared/CampCard";
 import useCamps from "../../hooks/useCamps";
 import Feedback from "./Feedback";
 import Banner from "./Banner";
+import { NavLink } from "react-router-dom";
 
 const Home = () => {
   const [camps, loading, refetch] = useCamps();
@@ -20,6 +21,16 @@ const Home = () => {
           {popularCamps.map((camp) => (
             <CampCard key={camp._id} camp={camp} />
           ))}
+        </div>
+        <div className="w-full text-center">
+          <NavLink
+            to={"/available-camps"}
+            className={
+              "text-center mt-4 btn bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600"
+            }
+          >
+            <button>Available Camps</button>
+          </NavLink>
         </div>
       </div>
 

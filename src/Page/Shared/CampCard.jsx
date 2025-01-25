@@ -46,7 +46,7 @@ const CampCard = ({ camp }) => {
             <div>
               <p className="text-sm text-gray-500">Time:</p>
               <p className="text-lg font-bold text-gray-800">
-                {moment(camp?.date).format("HH:mm A")}
+                {moment(camp?.date).format("hh:mm A")}
               </p>
             </div>
           </div>
@@ -98,7 +98,7 @@ const CampCard = ({ camp }) => {
       <div className="mt-auto p-5">
         <NavLink to={`/camp-details/${camp._id}`}>
           <button className="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition">
-            Join Now
+            Details
           </button>
         </NavLink>
       </div>

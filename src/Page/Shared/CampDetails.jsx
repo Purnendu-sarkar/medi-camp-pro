@@ -20,7 +20,7 @@ const CampDetails = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden border border-gray-300 mt-8 p-6">
+    <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden border border-gray-300 my-8 p-6 ">
       <div className="relative overflow-hidden rounded-lg mb-6 group">
         <img
           src={camp.image}
