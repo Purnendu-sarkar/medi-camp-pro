@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import SocialLogin from "./SocialLogin";
+import { Player } from "@lottiefiles/react-lottie-player";
+import signupLottie from "../../assets/lottie/signup.json";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -62,11 +64,12 @@ const SignUp = () => {
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Sign up now!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
+          <Player
+            autoplay
+            loop
+            src={signupLottie}
+            style={{ blockSize: "300px", inlineSize: "300px" }}
+          />
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
