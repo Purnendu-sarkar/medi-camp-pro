@@ -20,7 +20,12 @@ const UpdateCamp = () => {
     healthcareProfessional,
     description,
   } = useLoaderData();
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
@@ -52,7 +57,7 @@ const UpdateCamp = () => {
         if (response.data.modifiedCount > 0) {
           Swal.fire({
             icon: "success",
-            title: `${camp?.campName} updated successfully!`,
+            title: `${campName} updated successfully!`,
             showConfirmButton: false,
             timer: 1500,
           });
@@ -95,9 +100,12 @@ const UpdateCamp = () => {
             <input
               type="file"
               placeholder="Upload an image for the camp"
-              {...register("image", { required: "Image is required" })}
+              {...register("image", { required: "Please Confirm the image of this camp." })}
               className="file-input"
             />
+            {errors.image && (
+              <p className="text-red-500">{errors.image.message}</p>
+            )}
           </div>
           <div className="form-control">
             <label className="label">Camp Fees*</label>
