@@ -12,7 +12,7 @@ import { NavLink } from "react-router-dom";
 
 const CampCard = ({ camp }) => {
   return (
-    <div className="max-w-sm mx-auto bg-white rounded-lg shadow-lg overflow-hidden border border-gray-300 flex flex-col transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+    <div className="bg-gradient-to-r from-red-50 via-orange-50 to-violet-50 rounded-lg shadow-lg overflow-hidden border border-gray-300 flex flex-col transform transition-transform duration-300 hover:scale-105 hover:shadow-orange-200">
       {/* Image Section */}
       <div className="relative">
         <img
