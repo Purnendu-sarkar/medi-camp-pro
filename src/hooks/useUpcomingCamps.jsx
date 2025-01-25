@@ -13,10 +13,16 @@ const useUpcomingCamps = () => {
       const currentDate = new Date();
       const filteredCamps = allCamps.filter((camp) => {
         const campDate = new Date(camp.date);
-        return campDate > currentDate;
+        return campDate >= currentDate;
       });
 
-      setUpcomingCamps(filteredCamps);
+      const sortedCamps = filteredCamps.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateA - dateB;
+      });
+
+      setUpcomingCamps(sortedCamps);
     } catch (error) {
       console.error("Error fetching upcoming camps:", error);
     }
