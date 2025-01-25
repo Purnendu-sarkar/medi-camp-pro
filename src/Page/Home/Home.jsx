@@ -7,36 +7,51 @@ import { NavLink } from "react-router-dom";
 import UpcomingCamps from "./UpcomingCamps";
 
 const Home = () => {
-  const [camps, loading, refetch] = useCamps();
+  const [camps, loading] = useCamps();
   const popularCamps = camps
     .sort((a, b) => b.participantCount - a.participantCount)
     .slice(0, 6);
+
   return (
-    <div className="">
+    <div className="bg-gray-50">
+      {/* Banner Section */}
       <Banner></Banner>
-      <div className="max-w-7xl mx-auto px-4 py-8 p-6">
-        <h1 className="text-2xl font-bold text-center mb-10">
+
+      {/* Popular Medical Camps Section */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-12">
           Popular Medical Camps
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {popularCamps.map((camp) => (
-            <CampCard key={camp._id} camp={camp} />
-          ))}
-        </div>
-        <div className="w-full text-center">
+        {loading ? (
+          <div className="flex justify-center items-center h-40">
+            <div className="loader border-t-4 border-blue-500 w-16 h-16 rounded-full animate-spin"></div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {popularCamps.map((camp) => (
+              <CampCard key={camp._id} camp={camp}></CampCard>
+            ))}
+          </div>
+        )}
+        <div className="w-full text-center mt-10">
           <NavLink
-            to={"/available-camps"}
-            className={
-              "text-center mt-4 btn bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600"
-            }
+            to="/available-camps"
+            className="inline-block bg-blue-600 hover:bg-blue-700 text-white text-lg px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg focus:ring-4 focus:ring-blue-300"
           >
-            <button>Available Camps</button>
+            Available Camps
           </NavLink>
         </div>
       </div>
 
-      <Feedback></Feedback>
-      <UpcomingCamps></UpcomingCamps>
+      {/* Feedback Section */}
+      <div className="bg-gradient-to-br from-blue-50 to-blue-200 py-16">
+        <Feedback></Feedback>
+      </div>
+
+      {/* Upcoming Camps Section */}
+      <div className="bg-gradient-to-br from-green-100 to-green-300 py-16">
+        <UpcomingCamps></UpcomingCamps>
+      </div>
     </div>
   );
 };
