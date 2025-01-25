@@ -5,8 +5,12 @@ import {
   FaLinkedinIn,
   FaInstagram,
 } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
+import useAdmin from "../../hooks/useAdmin";
 
 const Footer = () => {
+  const { user } = useAuth();
+  const [isAdmin] = useAdmin();
   return (
     <footer className="bg-gray-900 text-gray-300 py-10">
       <div className="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -37,14 +41,36 @@ const Footer = () => {
                 Available Camps
               </a>
             </li>
-            <li>
-              <a
-                href="/join-us"
-                className="hover:text-blue-400 transition-colors"
-              >
-                Join Us
-              </a>
-            </li>
+            {user ? (
+              isAdmin ? (
+                <li>
+                  <a
+                    href="/dashboard/adminProfile"
+                    className="hover:text-blue-400 transition-colors"
+                  >
+                    Admin Profile
+                  </a>
+                </li>
+              ) : (
+                <li>
+                  <a
+                    href="/dashboard/userHome"
+                    className="hover:text-blue-400 transition-colors"
+                  >
+                    Profile
+                  </a>
+                </li>
+              )
+            ) : (
+              <li>
+                <a
+                  href="/join-us"
+                  className="hover:text-blue-400 transition-colors"
+                >
+                  Join Us
+                </a>
+              </li>
+            )}
             <li>
               <a
                 href="/dashboard"
