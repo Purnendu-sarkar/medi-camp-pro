@@ -4,6 +4,7 @@ import useCamps from "../../hooks/useCamps";
 import Feedback from "./Feedback";
 import Banner from "./Banner";
 import { NavLink } from "react-router-dom";
+import UpcomingCamps from "./UpcomingCamps";
 
 const Home = () => {
   const [camps, loading, refetch] = useCamps();
@@ -35,6 +36,7 @@ const Home = () => {
       </div>
 
       <Feedback></Feedback>
+      <UpcomingCamps></UpcomingCamps>
     </div>
   );
 };
