@@ -25,10 +25,7 @@ const SignUp = () => {
     setLoading(true);
     try {
       const result = await createUser(data.email, data.password);
-      console.log(result.user);
       updateUserProfile(data.name, data.photoURL).then(() => {
-        console.log("user profile info updated");
-        //Create user entry in the database
         const userInfo = {
           name: data.name,
           email: data.email,
@@ -36,10 +33,8 @@ const SignUp = () => {
           phoneNumber: data.phoneNumber,
           role: "admin",
         };
-
         axiosPublic.post("/users", userInfo).then((res) => {
           if (res.data.insertedId) {
-            console.log("User Added to the database");
             reset();
             Swal.fire({
               position: "top-end",
@@ -53,44 +48,58 @@ const SignUp = () => {
         });
       });
     } catch (error) {
-      console.error("Sign up failed:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Sign Up Failed",
+        text: error.message,
+      });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Sign up now!</h1>
-          <Player
-            autoplay
-            loop
-            src={signupLottie}
-            style={{ blockSize: "300px", inlineSize: "300px" }}
-          />
+    <div className="hero min-h-screen bg-gradient-to-r from-pink-100 via-purple-100 to-indigo-100">
+      <div className="hero-content flex-col lg:flex-row-reverse items-center gap-8">
+        {/* Lottie Animation Section */}
+        <div className="lg:w-1/2 text-center lg:text-left">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800">
+            Create Your Account!
+          </h1>
+          <p className="mt-4 text-gray-600">
+            Join us and explore the world of possibilities.
+          </p>
+          <Player autoplay loop src={signupLottie} className="w-full mx-auto" />
         </div>
-        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+
+        {/* SignUp Form Section */}
+        <div className="card w-full max-w-lg shadow-lg bg-white rounded-lg p-8">
+          <h2 className="text-2xl font-bold text-center text-gray-700">
+            Sign Up Now
+          </h2>
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
+            {/* Name Field */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Name</span>
+                <span className="label-text text-gray-600">Full Name</span>
               </label>
               <input
                 type="text"
                 {...register("name", { required: true })}
-                placeholder="Name"
-                className="input input-bordered"
+                placeholder="Your full name"
+                className="input input-bordered w-full focus:ring-2 focus:ring-purple-500"
               />
               {errors.name && (
-                <span className="text-red-600">Please provide your name</span>
+                <span className="text-sm text-red-500">
+                  Please provide your name
+                </span>
               )}
             </div>
 
-            <div className="form-control">
+            {/* Phone Number Field */}
+            <div className="form-control mt-4">
               <label className="label">
-                <span className="label-text">Phone Number</span>
+                <span className="label-text text-gray-600">Phone Number</span>
               </label>
               <input
                 type="number"
@@ -98,51 +107,54 @@ const SignUp = () => {
                   required: true,
                   pattern: /^[0-9]{10,15}$/,
                 })}
-                placeholder="Phone Number"
-                className="input input-bordered"
+                placeholder="Your phone number"
+                className="input input-bordered w-full focus:ring-2 focus:ring-purple-500"
               />
-              {errors.phoneNumber?.type === "required" && (
-                <p className="text-red-600">Phone number is required</p>
-              )}
-              {errors.phoneNumber?.type === "pattern" && (
-                <p className="text-red-600">
+              {errors.phoneNumber && (
+                <span className="text-sm text-red-500">
                   Enter a valid phone number (10-15 digits)
-                </p>
+                </span>
               )}
             </div>
 
-            <div className="form-control">
+            {/* Photo URL Field */}
+            <div className="form-control mt-4">
               <label className="label">
-                <span className="label-text">Image URL</span>
+                <span className="label-text text-gray-600">Photo URL</span>
               </label>
               <input
                 type="text"
                 {...register("photoURL", { required: true })}
-                placeholder="Image URL"
-                className="input input-bordered"
+                placeholder="Link to your profile picture"
+                className="input input-bordered w-full focus:ring-2 focus:ring-purple-500"
               />
               {errors.photoURL && (
-                <span className="text-red-600">Image URL is required</span>
+                <span className="text-sm text-red-500">
+                  Photo URL is required
+                </span>
               )}
             </div>
 
-            <div className="form-control">
+            {/* Email Field */}
+            <div className="form-control mt-4">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text text-gray-600">Email</span>
               </label>
               <input
                 type="email"
                 {...register("email", { required: true })}
-                placeholder="Email"
-                className="input input-bordered"
+                placeholder="Your email address"
+                className="input input-bordered w-full focus:ring-2 focus:ring-purple-500"
               />
               {errors.email && (
-                <span className="text-red-600">Email is required</span>
+                <span className="text-sm text-red-500">Email is required</span>
               )}
             </div>
-            <div className="form-control">
+
+            {/* Password Field */}
+            <div className="form-control mt-4">
               <label className="label">
-                <span className="label-text">Password</span>
+                <span className="label-text text-gray-600">Password</span>
               </label>
               <input
                 type="password"
@@ -152,54 +164,41 @@ const SignUp = () => {
                   maxLength: 20,
                   pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
                 })}
-                placeholder="Password"
-                className="input input-bordered"
+                placeholder="Create a password"
+                className="input input-bordered w-full focus:ring-2 focus:ring-purple-500"
               />
-              {errors.password?.type === "required" && (
-                <p className="text-red-600">Password is required</p>
+              {errors.password && (
+                <span className="text-sm text-red-500">
+                  Password must include uppercase, lowercase, number, and a
+                  special character (6-20 characters).
+                </span>
               )}
-              {errors.password?.type === "minLength" && (
-                <p className="text-red-600">
-                  Password must be at least 6 characters
-                </p>
-              )}
-              {errors.password?.type === "maxLength" && (
-                <p className="text-red-600">
-                  Password must be less than 20 characters
-                </p>
-              )}
-              {errors.password?.type === "pattern" && (
-                <p className="text-red-600">
-                  Password must include 6–20 characters, with uppercase,
-                  lowercase, number, and a special character.
-                </p>
-              )}
-              <label className="label">
-                <a
-                  href="/forgot-password"
-                  className="label-text-alt link link-hover"
-                >
-                  Forgot password?
-                </a>
-              </label>
             </div>
+
+            {/* Submit Button */}
             <div className="form-control mt-6">
-              <input
-                className={`btn btn-primary ${loading ? "loading" : ""}`}
-                type="submit"
-                value={loading ? "Signing Up..." : "Sign Up"}
+              <button
+                className={`btn btn-primary w-full bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-indigo-600 hover:to-purple-600 text-white ${
+                  loading ? "loading" : ""
+                }`}
                 disabled={loading}
-              />
+              >
+                {loading ? "Creating Account..." : "Sign Up"}
+              </button>
             </div>
           </form>
-          <p className="text-center mt-1">
-            <small>
-              Already have an account? <Link to="/join-us">Join Us</Link>
-            </small>
+
+          {/* Login Redirect */}
+          <p className="text-center mt-4 text-gray-600">
+            Already have an account?{" "}
+            <Link to="/join-us" className="text-purple-500 font-medium">
+              Log In
+            </Link>
           </p>
-          <div className="p-5">
-            <SocialLogin></SocialLogin>
-          </div>
+          <div className="divider">OR</div>
+
+          {/* Social Login */}
+          <SocialLogin />
         </div>
       </div>
     </div>
