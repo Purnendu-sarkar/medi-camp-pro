@@ -1,6 +1,5 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-// import AuthContext from "../../providers/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
@@ -12,7 +11,6 @@ const LogIn = () => {
   const { signIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
   const from = location.state?.from?.pathname || "/";
 
   const {
@@ -26,19 +24,15 @@ const LogIn = () => {
     try {
       const result = await signIn(email, password);
       const user = result.user;
-      console.log(user);
       Swal.fire({
-        title: `USer Login Successful.`,
-        showClass: {
-          popup: "animate__animated animate__fadeInDown",
-        },
-        hideClass: {
-          popup: "animate__animated animate__fadeOutUp",
-        },
+        title: `User Login Successful`,
+        icon: "success",
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
       });
       navigate(from, { replace: true });
     } catch (error) {
-      console.error("Login failed:", error);
       Swal.fire({
         icon: "error",
         title: "Login Failed",
@@ -48,36 +42,53 @@ const LogIn = () => {
   };
 
   return (
-    <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content flex-col md:flex-row-reverse">
-        <div className="text-center md:w-1/2 lg:text-left">
-          <h1 className="text-5xl font-bold">Login now!</h1>
+    <div className="hero min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-50">
+      <div className="hero-content flex-col lg:flex-row-reverse items-center gap-10">
+        {/* Animation Section */}
+        <div className="text-center lg:text-left lg:w-1/2">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800">
+            Welcome Back!
+          </h1>
+          <p className="py-4 text-gray-600">
+            Log in to continue exploring our platform.
+          </p>
           <Player
             autoplay
             loop
             src={loginLottie}
-            style={{ blockSize: "300px", inlineSize: "300px" }}
+            className="max-w-full mx-auto"
+            style={{ blockSize: "350px", inlineSize: "350px" }}
           />
         </div>
-        <div className="card md:w-1/2 max-w-sm shadow-2xl bg-base-100">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+
+        {/* Login Form Section */}
+        <div className="card flex-shrink-0 w-full max-w-md shadow-lg bg-white rounded-lg p-8">
+          <h2 className="text-2xl font-bold text-center text-gray-700">
+            Login to Your Account
+          </h2>
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
+            {/* Email Field */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text text-gray-600">Email</span>
               </label>
               <input
                 type="email"
                 {...register("email", { required: "Email is required" })}
-                placeholder="Email"
-                className="input input-bordered"
+                placeholder="Enter your email"
+                className="input input-bordered w-full focus:ring-2 focus:ring-purple-500"
               />
               {errors.email && (
-                <span className="text-red-600">{errors.email.message}</span>
+                <span className="text-sm text-red-500">
+                  {errors.email.message}
+                </span>
               )}
             </div>
-            <div className="form-control">
+
+            {/* Password Field */}
+            <div className="form-control mt-4">
               <label className="label">
-                <span className="label-text">Password</span>
+                <span className="label-text text-gray-600">Password</span>
               </label>
               <input
                 type="password"
@@ -88,30 +99,46 @@ const LogIn = () => {
                     message: "Password must be at least 6 characters",
                   },
                 })}
-                placeholder="Password"
-                className="input input-bordered"
+                placeholder="Enter your password"
+                className="input input-bordered w-full focus:ring-2 focus:ring-purple-500"
               />
               {errors.password && (
-                <span className="text-red-600">{errors.password.message}</span>
+                <span className="text-sm text-red-500">
+                  {errors.password.message}
+                </span>
               )}
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
+              <label className="label mt-2">
+                <a
+                  href="#"
+                  className="label-text-alt link link-hover text-purple-500"
+                >
                   Forgot password?
                 </a>
               </label>
             </div>
+
+            {/* Submit Button */}
             <div className="form-control mt-6">
-              <input className="btn btn-primary" type="submit" value="Login" />
+              <button className="btn btn-primary w-full bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-indigo-500 hover:to-purple-500 text-white">
+                Login
+              </button>
             </div>
           </form>
 
-          <p className="text-center mt-1">
+          {/* Additional Links */}
+          <p className="text-center mt-4 text-gray-600">
             <small>
-              New Here? <Link to="/signUp">Create an account</Link>
+              New Here?{" "}
+              <Link to="/signUp" className="text-purple-500 font-medium">
+                Create an account
+              </Link>
             </small>
           </p>
-          <div className="p-5">
-            <SocialLogin></SocialLogin>
+          <div className="divider">OR</div>
+
+          {/* Social Login */}
+          <div className="p-4">
+            <SocialLogin />
           </div>
         </div>
       </div>
