@@ -137,11 +137,11 @@ const ManageRegisteredCamps = () => {
                     <button
                       onClick={() => handleCancel(camp._id)}
                       className={`px-4 py-2 text-white ${
-                        camp.paymentStatus || camp.paymentConfirmation
+                        camp.paymentStatus && camp.paymentConfirmation
                           ? "bg-gray-300 cursor-not-allowed"
                           : "bg-red-500 hover:bg-red-600"
                       } rounded`}
-                      disabled={camp.paymentStatus || camp.paymentConfirmation}
+                      disabled={camp.paymentStatus && camp.paymentConfirmation}
                     >
                       Cancel
                     </button>
