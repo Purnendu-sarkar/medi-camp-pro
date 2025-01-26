@@ -6,10 +6,13 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import SearchBar from "../Shared/SearchBar";
+import Pagination from "../Shared/Pagination";
 
 const ManageCamps = () => {
   const [camps, loading, refetch] = useCamps();
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 10;
   const axiosSecure = useAxiosSecure();
 
   const filteredCamps = camps.filter(
@@ -17,12 +20,17 @@ const ManageCamps = () => {
       camp.campName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (camp.location &&
         camp.location.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (camp.data &&
-        camp.date.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (camp.healthcareProfessional &&
         camp.healthcareProfessional
           .toLowerCase()
           .includes(searchQuery.toLowerCase()))
+  );
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredCamps.length / rowsPerPage);
+  const currentData = filteredCamps.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage
   );
 
   const handleDelete = (camp) => {
@@ -92,7 +100,7 @@ const ManageCamps = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredCamps.map((camp, index) => (
+              {currentData.map((camp, index) => (
                 <tr
                   key={camp._id}
                   className={
@@ -101,7 +109,9 @@ const ManageCamps = () => {
                       : "bg-white hover:bg-gray-50"
                   }
                 >
-                  <td className="px-4 py-2 border text-center">{index + 1}</td>
+                  <td className="px-4 py-2 border text-center">
+                    {(currentPage - 1) * rowsPerPage + index + 1}
+                  </td>
                   <td className="px-4 py-2 border">{camp?.campName}</td>
                   <td className="px-4 py-2 border">
                     {moment(camp?.date).format("DD/MM/YYYY HH:mm")}
@@ -127,6 +137,11 @@ const ManageCamps = () => {
               ))}
             </tbody>
           </table>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          ></Pagination>
         </div>
       )}
     </div>

@@ -3,10 +3,13 @@ import useManageRegisteredCamps from "../../hooks/useManageRegisteredCamps";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import SearchBar from "../Shared/SearchBar";
+import Pagination from "../Shared/Pagination";
 
 const ManageRegisteredCamps = () => {
   const [registeredCamps, loading, refetch] = useManageRegisteredCamps();
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 10;
   const axiosSecure = useAxiosSecure();
 
   const filteredCamps = registeredCamps.filter(
@@ -15,6 +18,13 @@ const ManageRegisteredCamps = () => {
       camp.fees.toString().includes(searchQuery) ||
       (camp.participantName &&
         camp.participantName.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredCamps.length / rowsPerPage);
+  const currentData = filteredCamps.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage
   );
 
   const handleConfirmation = async (registrationId) => {
@@ -109,7 +119,7 @@ const ManageRegisteredCamps = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredCamps.map((camp, index) => (
+              {currentData.map((camp, index) => (
                 <tr
                   key={camp._id}
                   className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}
@@ -165,6 +175,11 @@ const ManageRegisteredCamps = () => {
               ))}
             </tbody>
           </table>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          ></Pagination>
         </div>
       )}
     </div>

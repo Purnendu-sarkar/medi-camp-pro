@@ -3,11 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import SearchBar from "../Shared/SearchBar";
+import Pagination from "../Shared/Pagination";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 10;
 
   // Fetch payment history using react-query
   const {
@@ -71,6 +74,13 @@ const PaymentHistory = () => {
         .includes(searchQuery.toLowerCase())
   );
 
+  // Pagination logic
+  const totalPages = Math.ceil(filteredPayments.length / rowsPerPage);
+  const currentData = filteredPayments.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage
+  );
+
   return (
     <div className="p-6">
       <h2 className="text-3xl font-extrabold mb-6 text-center text-blue-600">
@@ -112,7 +122,7 @@ const PaymentHistory = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredPayments.map((payment, index) => {
+              {currentData.map((payment, index) => {
                 const paymentDate = new Date(payment.date);
                 return (
                   <tr
@@ -163,6 +173,11 @@ const PaymentHistory = () => {
               })}
             </tbody>
           </table>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          ></Pagination>
         </div>
       )}
     </div>

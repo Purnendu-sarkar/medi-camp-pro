@@ -4,10 +4,13 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import SearchBar from "../Shared/SearchBar";
+import Pagination from "../Shared/Pagination";
 
 const RegisteredCamps = () => {
   const [registeredCamps, isLoading, refetch] = useRegisteredCamps();
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 10;
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
 
@@ -15,6 +18,13 @@ const RegisteredCamps = () => {
     (camp) =>
       camp.campName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       camp.fees.toString().includes(searchQuery)
+  );
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredCamps.length / rowsPerPage);
+  const currentData = filteredCamps.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage
   );
 
   const handlePayment = (camp) => {
@@ -90,87 +100,102 @@ const RegisteredCamps = () => {
             </p>
           </div>
         ) : (
-          <table className="table-auto w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
-                <th className="p-4 text-center">#</th>
-                <th className="p-4">Camp Name</th>
-                <th className="p-4">Camp Fees</th>
-                <th className="p-4">Participant Name</th>
-                <th className="p-4">Payment Status</th>
-                <th className="p-4">Payment Confirmation</th>
-                <th className="p-4 text-center">Cancel</th>
-                <th className="p-4 text-center">Feedback</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredCamps.map((camp, index) => (
-                <tr
-                  key={camp._id}
-                  className={`${
-                    index % 2 === 0 ? "bg-gray-100" : "bg-white"
-                  } hover:bg-gray-50 transition`}
-                >
-                  <td className="p-4 text-center text-gray-700">{index + 1}</td>
-                  <td className="p-4 text-gray-700">{camp.campName}</td>
-                  <td className="p-4 text-gray-700">
-                    {camp.fees ? `$${camp.fees}` : "Free"}
-                  </td>
-                  <td className="p-4 text-gray-700">{camp.participantName}</td>
-                  <td className="p-4 text-gray-700">
-                    {camp.paymentStatus ? (
-                      <span className="px-2 py-1 text-green-600 bg-green-100 rounded-full">
-                        Paid
-                      </span>
-                    ) : (
-                      <button
-                        className="px-3 py-1 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-300 transition"
-                        onClick={() => handlePayment(camp)}
-                      >
-                        Pay
-                      </button>
-                    )}
-                  </td>
-                  <td className="p-4 text-gray-700">
-                    {camp.paymentConfirmation ? (
-                      <span className="px-2 py-1 text-green-600 bg-green-100 rounded-full">
-                        Confirmed
-                      </span>
-                    ) : (
-                      <span className="px-2 py-1 text-yellow-600 bg-yellow-100 rounded-full">
-                        Pending
-                      </span>
-                    )}
-                  </td>
-                  <td className="p-4 text-center">
-                    <button
-                      onClick={() => handleCancel(camp._id)}
-                      className={`px-4 py-2 text-white rounded ${
-                        camp.paymentStatus || camp.paymentConfirmation
-                          ? "bg-gray-300 cursor-not-allowed"
-                          : "bg-red-500 hover:bg-red-600"
-                      }`}
-                      disabled={camp.paymentStatus || camp.paymentConfirmation}
-                    >
-                      Cancel
-                    </button>
-                  </td>
-                  <td className="p-4 text-center">
-                    {camp.paymentConfirmation ? (
-                      <button
-                        className="px-3 py-1 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition"
-                        onClick={() => handleFeedback(camp)}
-                      >
-                        Feedback
-                      </button>
-                    ) : (
-                      <span className="px-2 py-1 text-gray-400">Wait!....</span>
-                    )}
-                  </td>
+          <>
+            <table className="table-auto w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+                  <th className="p-4 text-center">#</th>
+                  <th className="p-4">Camp Name</th>
+                  <th className="p-4">Camp Fees</th>
+                  <th className="p-4">Participant Name</th>
+                  <th className="p-4">Payment Status</th>
+                  <th className="p-4">Payment Confirmation</th>
+                  <th className="p-4 text-center">Cancel</th>
+                  <th className="p-4 text-center">Feedback</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {currentData.map((camp, index) => (
+                  <tr
+                    key={camp._id}
+                    className={`${
+                      index % 2 === 0 ? "bg-gray-100" : "bg-white"
+                    } hover:bg-gray-50 transition`}
+                  >
+                    <td className="p-4 text-center text-gray-700">
+                      {(currentPage - 1) * rowsPerPage + index + 1}
+                    </td>
+                    <td className="p-4 text-gray-700">{camp.campName}</td>
+                    <td className="p-4 text-gray-700">
+                      {camp.fees ? `$${camp.fees}` : "Free"}
+                    </td>
+                    <td className="p-4 text-gray-700">
+                      {camp.participantName}
+                    </td>
+                    <td className="p-4 text-gray-700">
+                      {camp.paymentStatus ? (
+                        <span className="px-2 py-1 text-green-600 bg-green-100 rounded-full">
+                          Paid
+                        </span>
+                      ) : (
+                        <button
+                          className="px-3 py-1 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-300 transition"
+                          onClick={() => handlePayment(camp)}
+                        >
+                          Pay
+                        </button>
+                      )}
+                    </td>
+                    <td className="p-4 text-gray-700">
+                      {camp.paymentConfirmation ? (
+                        <span className="px-2 py-1 text-green-600 bg-green-100 rounded-full">
+                          Confirmed
+                        </span>
+                      ) : (
+                        <span className="px-2 py-1 text-yellow-600 bg-yellow-100 rounded-full">
+                          Pending
+                        </span>
+                      )}
+                    </td>
+                    <td className="p-4 text-center">
+                      <button
+                        onClick={() => handleCancel(camp._id)}
+                        className={`px-4 py-2 text-white rounded ${
+                          camp.paymentStatus || camp.paymentConfirmation
+                            ? "bg-gray-300 cursor-not-allowed"
+                            : "bg-red-500 hover:bg-red-600"
+                        }`}
+                        disabled={
+                          camp.paymentStatus || camp.paymentConfirmation
+                        }
+                      >
+                        Cancel
+                      </button>
+                    </td>
+                    <td className="p-4 text-center">
+                      {camp.paymentConfirmation ? (
+                        <button
+                          className="px-3 py-1 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition"
+                          onClick={() => handleFeedback(camp)}
+                        >
+                          Feedback
+                        </button>
+                      ) : (
+                        <span className="px-2 py-1 text-gray-400">
+                          Wait!....
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            ></Pagination>
+          </>
         )}
       </div>
     </div>
