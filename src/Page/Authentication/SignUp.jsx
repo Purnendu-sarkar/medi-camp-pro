@@ -32,7 +32,7 @@ const SignUp = () => {
           email: data.email,
           img: data.photoURL,
           phoneNumber: data.phoneNumber,
-          role: "admin",
+          role: "user",
         };
         axiosPublic.post("/users", userInfo).then((res) => {
           if (res.data.insertedId) {
