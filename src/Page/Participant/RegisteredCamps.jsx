@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import useRegisteredCamps from "../../hooks/useRegisteredCamps";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import SearchBar from "../Shared/SearchBar";
 
 const RegisteredCamps = () => {
   const [registeredCamps, isLoading, refetch] = useRegisteredCamps();
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
+
+  const filteredCamps = registeredCamps.filter(
+    (camp) =>
+      camp.campName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      camp.fees.toString().includes(searchQuery)
+  );
 
   const handlePayment = (camp) => {
     navigate(`/dashboard/payment/${camp._id}`, { state: { camp } });
@@ -65,6 +73,11 @@ const RegisteredCamps = () => {
       <h1 className="text-3xl font-bold text-center mb-8 text-gray-700">
         Registered Camps
       </h1>
+      <SearchBar
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        placeholder="Search by Camp Name or Fees..."
+      ></SearchBar>
       <div className="overflow-x-auto shadow-lg rounded-lg bg-white">
         {registeredCamps.length === 0 ? (
           <div className="flex flex-col justify-center items-center h-screen">
@@ -91,7 +104,7 @@ const RegisteredCamps = () => {
               </tr>
             </thead>
             <tbody>
-              {registeredCamps.map((camp, index) => (
+              {filteredCamps.map((camp, index) => (
                 <tr
                   key={camp._id}
                   className={`${

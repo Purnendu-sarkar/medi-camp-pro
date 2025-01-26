@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import SearchBar from "../Shared/SearchBar";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Fetch payment history using react-query
   const {
@@ -46,13 +48,40 @@ const PaymentHistory = () => {
     (a, b) => new Date(b.date) - new Date(a.date)
   );
 
+  // Filter payment history based on search query
+  const filteredPayments = sortedPaymentHistory.filter(
+    (payment) =>
+      payment.campName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      payment.fees?.toString().includes(searchQuery) ||
+      payment.paymentStatus
+        ?.toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
+      payment.paymentConfirmation
+        ?.toString()
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
+      payment.transactionId
+        ?.toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
+      new Date(payment.date)
+        .toLocaleDateString()
+        .includes(searchQuery.toLowerCase()) ||
+      new Date(payment.date)
+        .toLocaleTimeString()
+        .includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="p-6">
       <h2 className="text-3xl font-extrabold mb-6 text-center text-blue-600">
         Payment History
       </h2>
-
-      {paymentHistory.length === 0 ? (
+      <SearchBar
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        placeholder="Search by any field..."
+      ></SearchBar>
+      {filteredPayments.length === 0 ? (
         <div className="flex flex-col items-center justify-center h-screen text-gray-600">
           <h2 className="text-2xl font-bold mb-4">No Payment History Found</h2>
           <p className="text-lg text-center">
@@ -83,7 +112,7 @@ const PaymentHistory = () => {
               </tr>
             </thead>
             <tbody>
-              {sortedPaymentHistory.map((payment, index) => {
+              {filteredPayments.map((payment, index) => {
                 const paymentDate = new Date(payment.date);
                 return (
                   <tr

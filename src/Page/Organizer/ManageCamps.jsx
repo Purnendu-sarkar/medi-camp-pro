@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import useCamps from "../../hooks/useCamps";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import SearchBar from "../Shared/SearchBar";
 
 const ManageCamps = () => {
   const [camps, loading, refetch] = useCamps();
+  const [searchQuery, setSearchQuery] = useState("");
   const axiosSecure = useAxiosSecure();
+
+  const filteredCamps = camps.filter(
+    (camp) =>
+      camp.campName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (camp.location &&
+        camp.location.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (camp.data &&
+        camp.date.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (camp.healthcareProfessional &&
+        camp.healthcareProfessional
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()))
+  );
 
   const handleDelete = (camp) => {
     Swal.fire({
@@ -54,6 +69,11 @@ const ManageCamps = () => {
   return (
     <div className="px-4 lg:px-8 py-6">
       <h1 className="text-2xl font-bold text-center mb-6">Manage Camps</h1>
+      <SearchBar
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        placeholder="Search by Camp Name, Date & Time, Location or Professional..."
+      ></SearchBar>
       <div className="overflow-x-auto">
         <table className="table-auto w-full border-collapse border border-gray-300 text-sm">
           <thead>
@@ -69,7 +89,7 @@ const ManageCamps = () => {
             </tr>
           </thead>
           <tbody>
-            {camps.map((camp, index) => (
+            {filteredCamps.map((camp, index) => (
               <tr key={camp._id} className="hover:bg-gray-50">
                 <td className="border border-gray-300 p-2 text-center">
                   {index + 1}
