@@ -67,60 +67,68 @@ const ManageCamps = () => {
   }
 
   return (
-    <div className="px-4 lg:px-8 py-6">
-      <h1 className="text-2xl font-bold text-center mb-6">Manage Camps</h1>
+    <div className="container mx-auto px-4 py-6">
+      <h1 className="text-3xl font-bold text-center text-indigo-600 mb-6">
+        Manage Camps
+      </h1>
       <SearchBar
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
-        placeholder="Search by Camp Name, Date & Time, Location or Professional..."
+        placeholder="Search by any field..."
       ></SearchBar>
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse border border-gray-300 text-sm">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="border border-gray-300 p-2">#</th>
-              <th className="border border-gray-300 p-2">Name</th>
-              <th className="border border-gray-300 p-2">Date & Time</th>
-              <th className="border border-gray-300 p-2">Location</th>
-              <th className="border border-gray-300 p-2">
-                Healthcare Professional
-              </th>
-              <th className="border border-gray-300 p-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredCamps.map((camp, index) => (
-              <tr key={camp._id} className="hover:bg-gray-50">
-                <td className="border border-gray-300 p-2 text-center">
-                  {index + 1}
-                </td>
-                <td className="border border-gray-300 p-2">{camp?.campName}</td>
-                <td className="border border-gray-300 p-2">
-                  {/* Formatting date and time */}
-                  {moment(camp?.date).format("DD/MM/YYYY HH:mm")}
-                </td>
-                <td className="border border-gray-300 p-2">{camp?.location}</td>
-                <td className="border border-gray-300 p-2">
-                  {camp?.healthcareProfessional}
-                </td>
-                <td className="border border-gray-300 p-2 w-10 mx-auto justify-center space-x-4">
-                  <Link to={`/dashboard/updateCamp/${camp._id}`}>
-                    <button className="text-blue-500 hover:text-blue-700">
-                      <FaEdit className="w-full  h-full" />
-                    </button>
-                  </Link>
-                  <button
-                    onClick={() => handleDelete(camp)}
-                    className="text-red-500 hover:text-red-700"
-                  >
-                    <FaTrash className="w-full h-full" />
-                  </button>
-                </td>
+      {camps.length === 0 ? (
+        <p className="text-center text-gray-500 mt-4">No camps found.</p>
+      ) : (
+        <div className="overflow-x-auto shadow-md rounded-lg mt-4">
+          <table className="table-auto w-full text-sm text-left border-collapse border border-gray-300">
+            <thead>
+              <tr className="bg-indigo-600 text-white">
+                <th className="px-4 py-2 border">#</th>
+                <th className="px-4 py-2 border">Name</th>
+                <th className="px-4 py-2 border">Date & Time</th>
+                <th className="px-4 py-2 border">Location</th>
+                <th className="px-4 py-2 border">Healthcare Professional</th>
+                <th className="px-4 py-2 border">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {filteredCamps.map((camp, index) => (
+                <tr
+                  key={camp._id}
+                  className={
+                    index % 2 === 0
+                      ? "bg-gray-100"
+                      : "bg-white hover:bg-gray-50"
+                  }
+                >
+                  <td className="px-4 py-2 border text-center">{index + 1}</td>
+                  <td className="px-4 py-2 border">{camp?.campName}</td>
+                  <td className="px-4 py-2 border">
+                    {moment(camp?.date).format("DD/MM/YYYY HH:mm")}
+                  </td>
+                  <td className="px-4 py-2 border">{camp?.location}</td>
+                  <td className="px-4 py-2 border">
+                    {camp?.healthcareProfessional}
+                  </td>
+                  <td className="px-4 py-2 border text-center lg:space-x-2 sm:space-y-2">
+                    <Link to={`/dashboard/updateCamp/${camp._id}`}>
+                      <button className="px-3 py-1 text-sm font-semibold text-white bg-blue-500 rounded hover:bg-blue-600">
+                        <FaEdit />
+                      </button>
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(camp)}
+                      className="px-3 py-1 text-sm font-semibold text-white bg-red-500 rounded hover:bg-red-600"
+                    >
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
