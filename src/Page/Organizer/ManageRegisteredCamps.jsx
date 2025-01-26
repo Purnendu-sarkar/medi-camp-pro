@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import useManageRegisteredCamps from "../../hooks/useManageRegisteredCamps";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import SearchBar from "../Shared/SearchBar";
 
 const ManageRegisteredCamps = () => {
   const [registeredCamps, loading, refetch] = useManageRegisteredCamps();
+  const [searchQuery, setSearchQuery] = useState("");
   const axiosSecure = useAxiosSecure();
+
+  const filteredCamps = registeredCamps.filter(
+    (camp) =>
+      camp.campName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      camp.fees.toString().includes(searchQuery) ||
+      (camp.participantName &&
+        camp.participantName.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
 
   const handleConfirmation = async (registrationId) => {
     try {
@@ -78,6 +88,11 @@ const ManageRegisteredCamps = () => {
       <h2 className="text-2xl font-bold text-center mb-6">
         Manage Registered Camps
       </h2>
+      <SearchBar
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        placeholder="Search by camp name, fees or participantName..."
+      ></SearchBar>
       {registeredCamps.length === 0 ? (
         <p className="text-center text-gray-500">No registered camps found.</p>
       ) : (
@@ -94,7 +109,7 @@ const ManageRegisteredCamps = () => {
               </tr>
             </thead>
             <tbody>
-              {registeredCamps.map((camp, index) => (
+              {filteredCamps.map((camp, index) => (
                 <tr
                   key={camp._id}
                   className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}
