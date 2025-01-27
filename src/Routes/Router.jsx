@@ -37,11 +37,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/available-camps",
-        element: (
-          <PrivateRoute>
-            <AvailableCamps></AvailableCamps>
-          </PrivateRoute>
-        ),
+        element: <AvailableCamps></AvailableCamps>,
       },
       {
         path: "/camp-details/:campId",
@@ -51,9 +47,9 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/camps/${params.campId}`).then((res) =>
-            res.json()
-          ),
+          fetch(
+            `https://medi-camp-server-seven.vercel.app/camps/${params.campId}`
+          ).then((res) => res.json()),
       },
       {
         path: "/join-us",
@@ -114,7 +110,7 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/camps/${params.id}`),
+          fetch(`https://medi-camp-server-seven.vercel.app/camps/${params.id}`),
       },
       {
         path: "/dashboard/registeredCamps",
