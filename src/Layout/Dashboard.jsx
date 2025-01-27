@@ -20,10 +20,14 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAdmin) {
-      navigate("/dashboard/registeredCamps");
-    } else {
-      navigate("/dashboard/analytics");
+    const currentPath = window.location.pathname;
+
+    if (currentPath === "/dashboard") {
+      if (isAdmin) {
+        navigate("/dashboard/registeredCamps");
+      } else {
+        navigate("/dashboard/analytics");
+      }
     }
   }, [isAdmin, navigate]);
 
