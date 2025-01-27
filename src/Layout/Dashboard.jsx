@@ -22,6 +22,7 @@ const Dashboard = () => {
   useEffect(() => {
     const currentPath = window.location.pathname;
 
+    
     if (currentPath === "/dashboard") {
       if (isAdmin) {
         navigate("/dashboard/registeredCamps");
