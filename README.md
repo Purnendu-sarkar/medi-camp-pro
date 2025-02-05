@@ -1,5 +1,7 @@
 # MediCamp
 
+![MediCamp Screenshot](https://i.ibb.co.com/d4f3yvT2/MediCamp.png)
+
 ## Overview
 
 MediCamp is a Medical Camp Management System (MCMS) built with the MERN stack. It is designed to help organizers and participants seamlessly manage medical camps. The platform provides tools for registration, payment, feedback collection, and detailed camp analytics, ensuring a smooth and efficient experience for all users.
