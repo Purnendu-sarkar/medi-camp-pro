@@ -7,7 +7,9 @@ const Main = () => {
   return (
     <div>
       <NavBar></NavBar>
-      <Outlet></Outlet>
+      <div className="mt-16 lg:mt-[68px]">
+        <Outlet></Outlet>
+      </div>
       <Footer></Footer>
     </div>
   );
