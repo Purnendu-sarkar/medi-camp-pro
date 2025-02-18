@@ -14,7 +14,7 @@ const Feedback = () => {
   };
 
   return (
-    <div className="px-4 lg:px-8 py-16 bg-gradient-to-br from-blue-50 to-blue-200">
+    <div className="w-full md:w-11/12 mx-auto px-4 lg:px-8 py-16">
       <h2 className="text-4xl font-bold text-center text-blue-700 mb-12">
         Participants Feedback
       </h2>

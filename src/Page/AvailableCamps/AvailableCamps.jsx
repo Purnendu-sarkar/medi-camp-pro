@@ -34,7 +34,7 @@ const AvailableCamps = () => {
       <Helmet>
         <title>MediCamp | Available Camp</title>
       </Helmet>
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="w-full md:w-11/12 mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
           {/* Search Bar */}
           <div className="relative w-full md:w-96">
@@ -92,8 +92,8 @@ const AvailableCamps = () => {
         <div
           className={`grid gap-6 ${
             layout === "grid"
-              ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-              : "grid-cols-1 md:grid-cols-2 "
+              ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+              : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 "
           }`}
         >
           {sortedCamps.map((camp) => (

@@ -11,7 +11,7 @@ const UpcomingCamps = () => {
   }, [fetchUpcomingCamps]);
 
   return (
-    <div className="px-6 lg:px-12 py-16 bg-gradient-to-br from-green-100 to-green-300">
+    <div className="w-full md:w-11/12 mx-auto px-6 lg:px-12 py-16">
       <h2 className="text-4xl font-bold text-center text-green-800 mb-12 drop-shadow-lg">
         🌟 Explore Upcoming Camps 🌟
       </h2>

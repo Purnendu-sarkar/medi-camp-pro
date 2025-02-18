@@ -18,12 +18,12 @@ const Home = () => {
       <Helmet>
         <title>MediCamp | Home</title>
       </Helmet>
-      <div className="bg-gray-50">
+      <div>
         {/* Banner Section */}
         <Banner></Banner>
 
         {/* Popular Medical Camps Section */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="w-full md:w-11/12 mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-12">
             Popular Medical Camps
           </h1>
@@ -49,12 +49,12 @@ const Home = () => {
         </div>
 
         {/* Feedback Section */}
-        <div className="bg-gradient-to-br from-blue-50 to-blue-200 py-16">
+        <div className="py-16">
           <Feedback></Feedback>
         </div>
 
         {/* Upcoming Camps Section */}
-        <div className="bg-gradient-to-br from-green-100 to-green-300 py-16">
+        <div className="py-16">
           <UpcomingCamps></UpcomingCamps>
         </div>
       </div>
