@@ -1,4 +1,4 @@
-import { Stethoscope, Sun, Moon } from "lucide-react";
+import { Stethoscope, Sun, Moon, X, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useState, useEffect } from "react";
@@ -55,8 +55,6 @@ const NavBar = () => {
       )}
     </>
   );
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <div className="navbar bg-black bg-opacity-30 dark:bg-gray-900 dark:text-white text-white w-full fixed top-0 left-0 z-50">
@@ -128,59 +126,50 @@ const NavBar = () => {
               <Moon className="h-6 w-6 text-gray-700" />
             )}
           </button>
-          <div className="dropdown">
-            <label
-              tabIndex={0}
-              onClick={toggleMenu}
-              className="btn btn-ghost md:hidden"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
-            </label>
-            {isMenuOpen && (
-              <ul
-                tabIndex={0}
-                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 dark:bg-gray-800 rounded-box w-52"
-              >
-                {navOptions}
-                {user && (
-                  <>
-                    <li>
-                      <Link
-                        to="/dashboard"
-                        className="font-bold text-gray-700 dark:text-white"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Dashboard
-                      </Link>
-                    </li>
-                    <li>
-                      <button
-                        onClick={handleLogOut}
-                        className="font-medium text-red-600 hover:text-red-800"
-                      >
-                        LogOut
-                      </button>
-                    </li>
-                  </>
-                )}
-              </ul>
-            )}
-          </div>
+          <button
+            onClick={() => setIsMenuOpen(true)}
+            className="p-2 rounded-full hover:bg-gray-300 dark:hover:bg-gray-700 transition duration-300"
+          >
+            <Menu className="h-6 w-6 text-gray-700 dark:text-white" />
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 bg-white dark:bg-black bg-opacity-80 backdrop-blur-md flex flex-col justify-center items-center z-50 transition-opacity duration-300">
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="absolute top-6 right-6 p-3 rounded-full bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition duration-300"
+          >
+            <X className="h-6 w-6 text-black dark:text-white" />
+          </button>
+          <ul className="space-y-6 text-center">
+            {navOptions}
+            {user && (
+              <>
+                <li>
+                  <Link
+                    to="/dashboard"
+                    className="font-bold text-gray-700 dark:text-white text-xl"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={handleLogOut}
+                    className="font-medium text-red-600 text-xl hover:text-red-800"
+                  >
+                    LogOut
+                  </button>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
