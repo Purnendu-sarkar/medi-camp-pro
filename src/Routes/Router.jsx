@@ -27,22 +27,23 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <NotFound></NotFound>,
     children: [
       {
         path: "/",
         element: <Home></Home>,
       },
-      {
-        path: "*",
-        element: <NotFound></NotFound>,
-      },
+      // {
+      //   path: "*",
+      //   element: <NotFound></NotFound>,
+      // },
       {
         path: "/available-camps",
         element: <AvailableCamps></AvailableCamps>,
       },
       {
         path: "/how-it-works",
-        element: <HowItWorks></HowItWorks>
+        element: <HowItWorks></HowItWorks>,
       },
       {
         path: "/camp-details/:campId",
