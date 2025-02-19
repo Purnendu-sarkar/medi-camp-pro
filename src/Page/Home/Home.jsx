@@ -6,6 +6,7 @@ import Banner from "./Banner";
 import { NavLink } from "react-router-dom";
 import UpcomingCamps from "./UpcomingCamps";
 import { Helmet } from "react-helmet-async";
+import Newsletter from "./Newsletter";
 
 const Home = () => {
   const [camps, loading] = useCamps();
@@ -23,7 +24,7 @@ const Home = () => {
         <Banner></Banner>
 
         {/* Popular Medical Camps Section */}
-        <div className="w-full md:w-11/12 mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="w-full md:w-11/12 mx-auto px-4 sm:px-6 lg:px-8 pt-8">
           <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-12">
             Popular Medical Camps
           </h1>
@@ -49,13 +50,18 @@ const Home = () => {
         </div>
 
         {/* Feedback Section */}
-        <div className="py-16">
+        <div className="pt-8">
           <Feedback></Feedback>
         </div>
 
         {/* Upcoming Camps Section */}
-        <div className="py-16">
+        <div className="pt-8">
           <UpcomingCamps></UpcomingCamps>
+        </div>
+
+        {/* Newsletter Section */}
+        <div className="pt-8">
+          <Newsletter></Newsletter>
         </div>
       </div>
     </>
