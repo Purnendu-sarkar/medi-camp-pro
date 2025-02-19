@@ -21,6 +21,7 @@ import PaymentHistory from "../Page/Participant/PaymentHistory";
 import FeedbackModal from "../Page/Participant/FeedbackModal";
 import Analytics from "../Page/Participant/Analytics";
 import NotFound from "../Page/Shared/NotFound";
+import HowItWorks from "../Page/HowItWorks/HowItWorks";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
       {
         path: "/available-camps",
         element: <AvailableCamps></AvailableCamps>,
+      },
+      {
+        path: "/how-it-works",
+        element: <HowItWorks></HowItWorks>
       },
       {
         path: "/camp-details/:campId",

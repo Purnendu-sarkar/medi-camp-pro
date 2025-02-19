@@ -42,6 +42,15 @@ const NavBar = () => {
           Available Camps
         </Link>
       </li>
+      <li>
+        <Link
+          to="/how-it-works"
+          className="font-bold text-gray-700 dark:text-white hover:text-blue-600 px-3 py-2"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          How It Works
+        </Link>
+      </li>
       {!user && (
         <li>
           <Link
