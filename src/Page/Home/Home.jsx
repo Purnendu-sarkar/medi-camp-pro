@@ -10,6 +10,7 @@ import Newsletter from "./Newsletter";
 import AboutUs from "./AboutUs";
 import MeetOurDoctors from "./MeetOurDoctors";
 import OurServices from "./OurServices";
+import SuccessStories from "./SuccessStories";
 
 const Home = () => {
   const [camps, loading] = useCamps();
@@ -70,6 +71,11 @@ const Home = () => {
         {/* Upcoming Camps Section */}
         <div className="pt-8">
           <UpcomingCamps></UpcomingCamps>
+        </div>
+
+        {/* Success Stories Section */}
+        <div className="pt-8">
+          <SuccessStories></SuccessStories>
         </div>
 
         {/* About Us Section */}
