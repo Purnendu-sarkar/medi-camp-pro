@@ -8,6 +8,7 @@ import UpcomingCamps from "./UpcomingCamps";
 import { Helmet } from "react-helmet-async";
 import Newsletter from "./Newsletter";
 import AboutUs from "./AboutUs";
+import MeetOurDoctors from "./MeetOurDoctors";
 
 const Home = () => {
   const [camps, loading] = useCamps();
@@ -48,6 +49,11 @@ const Home = () => {
               Available Camps
             </NavLink>
           </div>
+        </div>
+
+        {/* Meet Our Doctors Section */}
+        <div className="pt-8">
+          <MeetOurDoctors></MeetOurDoctors>
         </div>
 
         {/* Feedback Section */}
