@@ -5,7 +5,7 @@ import useCamps from "../../hooks/useCamps";
 import { Helmet } from "react-helmet-async";
 
 const AvailableCamps = () => {
-  const [camps] = useCamps();
+  const [camps, loading] = useCamps();
   const [layout, setLayout] = useState("grid");
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("popular");
@@ -89,17 +89,23 @@ const AvailableCamps = () => {
         </div>
 
         {/* Camps Grid/List */}
-        <div
-          className={`grid gap-6 ${
-            layout === "grid"
-              ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
-              : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 "
-          }`}
-        >
-          {sortedCamps.map((camp) => (
-            <CampCard key={camp._id} camp={camp}></CampCard>
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex justify-center items-center h-screen">
+            <div className="loader border-t-4 border-blue-500 w-24 h-24 rounded-full animate-spin"></div>
+          </div>
+        ) : (
+          <div
+            className={`grid gap-6 ${
+              layout === "grid"
+                ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+                : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 "
+            }`}
+          >
+            {sortedCamps.map((camp) => (
+              <CampCard key={camp._id} camp={camp}></CampCard>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
