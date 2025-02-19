@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet-async";
 import Newsletter from "./Newsletter";
 import AboutUs from "./AboutUs";
 import MeetOurDoctors from "./MeetOurDoctors";
+import OurServices from "./OurServices";
 
 const Home = () => {
   const [camps, loading] = useCamps();
@@ -54,6 +55,11 @@ const Home = () => {
         {/* Meet Our Doctors Section */}
         <div className="pt-8">
           <MeetOurDoctors></MeetOurDoctors>
+        </div>
+
+        {/* Our Services Section */}
+        <div className="pt-8">
+          <OurServices></OurServices>
         </div>
 
         {/* Feedback Section */}
