@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import UpcomingCamps from "./UpcomingCamps";
 import { Helmet } from "react-helmet-async";
 import Newsletter from "./Newsletter";
+import AboutUs from "./AboutUs";
 
 const Home = () => {
   const [camps, loading] = useCamps();
@@ -57,6 +58,11 @@ const Home = () => {
         {/* Upcoming Camps Section */}
         <div className="pt-8">
           <UpcomingCamps></UpcomingCamps>
+        </div>
+
+        {/* About Us Section */}
+        <div className="pt-8">
+          <AboutUs></AboutUs>
         </div>
 
         {/* Newsletter Section */}

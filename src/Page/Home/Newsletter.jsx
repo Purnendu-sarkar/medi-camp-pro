@@ -17,7 +17,7 @@ const Newsletter = () => {
   };
 
   return (
-    <div className="container mx-auto py-8 px-4 dark:bg-gray-900 bg-gray-100 transition-colors">
+    <div className="w-full md:w-11/12 mx-auto py-8 px-4 dark:bg-gray-900 bg-gray-100 transition-colors">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl font-bold dark:text-white text-gray-900 mb-4">
           Subscribe to Our Newsletter
