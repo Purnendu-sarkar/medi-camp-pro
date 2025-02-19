@@ -47,11 +47,12 @@ export const router = createBrowserRouter([
       },
       {
         path: "/camp-details/:campId",
-        element: (
-          <PrivateRoute>
-            <CampDetails></CampDetails>
-          </PrivateRoute>
-        ),
+        // element: (
+        //   <PrivateRoute>
+        //     <CampDetails></CampDetails>
+        //   </PrivateRoute>
+        // ),
+        element: <CampDetails></CampDetails>,
         loader: ({ params }) =>
           fetch(
             `https://medi-camp-server-seven.vercel.app/camps/${params.campId}`
@@ -74,6 +75,7 @@ export const router = createBrowserRouter([
         <Dashboard></Dashboard>
       </PrivateRoute>
     ),
+    errorElement: <NotFound></NotFound>,
     children: [
       {
         path: "/dashboard/updateProfile",
