@@ -110,9 +110,9 @@ const Profile = () => {
           >
             Update Profile
           </button>
-          <button className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 shadow-md">
+          {/* <button className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 shadow-md">
             Change Password
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
