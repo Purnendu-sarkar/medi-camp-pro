@@ -3,6 +3,7 @@ import useAxiosPublic from "./useAxiosPublic";
 
 const useFeedbacks = () => {
   const [feedbacks, setFeedbacks] = useState([]);
+  const [loading, setLoading] = useState(true);
   const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
@@ -21,12 +22,15 @@ const useFeedbacks = () => {
         setFeedbacks(feedbackWithImages);
       } catch (error) {
         console.error("Error fetching feedbacks:", error);
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchFeedbacks();
   }, [axiosPublic]);
 
-  return feedbacks;
+  return { feedbacks, loading };
 };
 
 export default useFeedbacks;
