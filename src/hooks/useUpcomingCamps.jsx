@@ -3,9 +3,11 @@ import useAxiosPublic from "./useAxiosPublic";
 
 const useUpcomingCamps = () => {
   const [upcomingCamps, setUpcomingCamps] = useState([]);
+  const [loading, setLoading] = useState(true);
   const axiosPublic = useAxiosPublic();
 
   const fetchUpcomingCamps = async () => {
+    // setLoading(true);
     try {
       const res = await axiosPublic.get("/camp");
       const allCamps = res.data;
@@ -25,10 +27,12 @@ const useUpcomingCamps = () => {
       setUpcomingCamps(sortedCamps);
     } catch (error) {
       console.error("Error fetching upcoming camps:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  return { upcomingCamps, fetchUpcomingCamps };
+  return { upcomingCamps, fetchUpcomingCamps, loading };
 };
 
 export default useUpcomingCamps;
