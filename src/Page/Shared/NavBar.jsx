@@ -14,6 +14,12 @@ const NavBar = () => {
     const theme = isDarkTheme ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
+
+    if (isDarkTheme) {
+      document.body.classList.add("bg-black", "text-white");
+    } else {
+      document.body.classList.remove("bg-black", "text-white");
+    }
   }, [isDarkTheme]);
 
   const handleLogOut = () => {
@@ -66,7 +72,7 @@ const NavBar = () => {
   );
 
   return (
-    <div className="navbar bg-black bg-opacity-30 dark:bg-gray-900 dark:text-white text-white w-full fixed top-0 left-0 z-50">
+    <div className="navbar bg-black bg-opacity-50 dark:bg-gray-900 dark:text-white text-white w-full fixed top-0 left-0 z-50">
       <div className="w-full md:w-11/12 mx-auto flex justify-between items-center px-4 lg:px-8">
         <Link to="/" className="flex items-center">
           <Stethoscope className="h-8 w-8 text-blue-600" />
