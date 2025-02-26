@@ -9,6 +9,7 @@ MediCamp is a Medical Camp Management System (MCMS) built with the MERN stack. I
 ## Live Site
 
 [Visit MediCamp Live Site](https://medi-camp-435d0.web.app)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Click%20Here-brightgreen)](https://medi-camp-435d0.web.app)
 
 ## Backend Link
 
