@@ -1,5 +1,5 @@
 import { Stethoscope, Sun, Moon, X, Menu } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useState, useEffect } from "react";
 
@@ -31,41 +31,57 @@ const NavBar = () => {
   const navOptions = (
     <>
       <li>
-        <Link
+        <NavLink
           to="/"
-          className="font-bold text-gray-700 dark:text-white hover:text-blue-600 px-3 py-2"
+          className={({ isActive }) =>
+            `font-bold px-3 py-2 ${
+              isActive ? "text-blue-600" : "text-gray-700 dark:text-white"
+            }`
+          }
           onClick={() => setIsMenuOpen(false)}
         >
           Home
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to="/available-camps"
-          className="font-bold text-gray-700 dark:text-white hover:text-blue-600 px-3 py-2"
+          className={({ isActive }) =>
+            `font-bold px-3 py-2 ${
+              isActive ? "text-blue-600" : "text-gray-700 dark:text-white"
+            }`
+          }
           onClick={() => setIsMenuOpen(false)}
         >
           Available Camps
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to="/how-it-works"
-          className="font-bold text-gray-700 dark:text-white hover:text-blue-600 px-3 py-2"
+          className={({ isActive }) =>
+            `font-bold px-3 py-2 ${
+              isActive ? "text-blue-600" : "text-gray-700 dark:text-white"
+            }`
+          }
           onClick={() => setIsMenuOpen(false)}
         >
           How It Works
-        </Link>
+        </NavLink>
       </li>
       {!user && (
         <li>
-          <Link
+          <NavLink
             to="/join-us"
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+            className={({ isActive }) =>
+              `bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 ${
+                isActive ? "ring-2 ring-blue-400" : ""
+              }`
+            }
             onClick={() => setIsMenuOpen(false)}
           >
             Join Us
-          </Link>
+          </NavLink>
         </li>
       )}
     </>
