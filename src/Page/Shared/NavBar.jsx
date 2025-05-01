@@ -30,65 +30,57 @@ const NavBar = () => {
 
   const navOptions = (
     <>
-      <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            `font-bold px-3 py-2 ${
-              isActive ? "text-blue-600" : "text-gray-700 dark:text-white"
-            }`
-          }
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/available-camps"
-          className={({ isActive }) =>
-            `font-bold px-3 py-2 ${
-              isActive ? "text-blue-600" : "text-gray-700 dark:text-white"
-            }`
-          }
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Available Camps
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/how-it-works"
-          className={({ isActive }) =>
-            `font-bold px-3 py-2 ${
-              isActive ? "text-blue-600" : "text-gray-700 dark:text-white"
-            }`
-          }
-          onClick={() => setIsMenuOpen(false)}
-        >
-          How It Works
-        </NavLink>
-      </li>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `font-bold px-3 py-2 ${
+            isActive ? "text-blue-600" : "text-gray-700 dark:text-white"
+          }`
+        }
+        onClick={() => setIsMenuOpen(false)}
+      >
+        Home
+      </NavLink>
+      <NavLink
+        to="/available-camps"
+        className={({ isActive }) =>
+          `font-bold px-3 py-2 ${
+            isActive ? "text-blue-600" : "text-gray-700 dark:text-white"
+          }`
+        }
+        onClick={() => setIsMenuOpen(false)}
+      >
+        Available Camps
+      </NavLink>
+      <NavLink
+        to="/how-it-works"
+        className={({ isActive }) =>
+          `font-bold px-3 py-2 ${
+            isActive ? "text-blue-600" : "text-gray-700 dark:text-white"
+          }`
+        }
+        onClick={() => setIsMenuOpen(false)}
+      >
+        How It Works
+      </NavLink>
       {!user && (
-        <li>
-          <NavLink
-            to="/join-us"
-            className={({ isActive }) =>
-              `bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 ${
-                isActive ? "ring-2 ring-blue-400" : ""
-              }`
-            }
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Join Us
-          </NavLink>
-        </li>
+        <NavLink
+          to="/join-us"
+          className={({ isActive }) =>
+            `bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 ${
+              isActive ? "ring-2 ring-blue-400" : ""
+            }`
+          }
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Join Us
+        </NavLink>
       )}
     </>
   );
 
   return (
-    <div className="navbar bg-black bg-opacity-50 dark:bg-gray-900 dark:text-white text-white w-full fixed top-0 left-0 z-50">
+    <div className="navbar bg-opacity-50 dark:bg-gray-900 dark:text-white text-white w-full fixed top-0 left-0 z-50">
       <div className="w-full md:w-11/12 mx-auto flex justify-between items-center px-4 lg:px-8">
         <Link to="/" className="flex items-center">
           <Stethoscope className="h-8 w-8 text-blue-600" />
@@ -118,7 +110,7 @@ const NavBar = () => {
                   <img src={user?.photoURL} alt="User Profile" />
                 </div>
               </label>
-              <ul
+              <div
                 tabIndex={0}
                 className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 dark:bg-gray-800 rounded-box w-52"
               >
@@ -142,7 +134,7 @@ const NavBar = () => {
                     LogOut
                   </button>
                 </li>
-              </ul>
+              </div>
             </div>
           )}
         </div>
@@ -175,30 +167,26 @@ const NavBar = () => {
           >
             <X className="h-6 w-6 text-black dark:text-white" />
           </button>
-          <ul className="space-y-6 text-center">
+          <div className="flex flex-col space-y-6 text-center">
             {navOptions}
             {user && (
               <>
-                <li>
-                  <Link
-                    to="/dashboard"
-                    className="font-bold text-gray-700 dark:text-white text-xl"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Dashboard
-                  </Link>
-                </li>
-                <li>
-                  <button
-                    onClick={handleLogOut}
-                    className="font-medium text-red-600 text-xl hover:text-red-800"
-                  >
-                    LogOut
-                  </button>
-                </li>
+                <Link
+                  to="/dashboard"
+                  className="font-bold text-gray-700 dark:text-white text-xl"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Dashboard
+                </Link>
+                <button
+                  onClick={handleLogOut}
+                  className="font-medium text-red-600 text-xl hover:text-red-800"
+                >
+                  LogOut
+                </button>
               </>
             )}
-          </ul>
+          </div>
         </div>
       )}
     </div>
