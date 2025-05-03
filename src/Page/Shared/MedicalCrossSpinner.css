@@ -1,0 +1,273 @@
+.cssload-circle {
+  position: relative;
+  margin: 49px auto;
+  width: 78px;
+  height: 78px;
+  overflow: hidden;
+  animation: cssload-rotates 2.3s infinite linear;
+  -o-animation: cssload-rotates 2.3s infinite linear;
+  -ms-animation: cssload-rotates 2.3s infinite linear;
+  -webkit-animation: cssload-rotates 2.3s infinite linear;
+  -moz-animation: cssload-rotates 2.3s infinite linear;
+}
+.cssload-up {
+  width: 29px;
+  height: 39px;
+  left: 24px;
+  overflow: hidden;
+  background: rgb(204, 238, 255);
+  position: absolute;
+}
+.cssload-up:before,
+.cssload-up:after {
+  content: "";
+  width: 29px;
+  height: 29px;
+  background: rgb(236, 240, 241);
+  position: absolute;
+  z-index: 1;
+}
+.cssload-up:before {
+  top: 29px;
+  left: -17px;
+  transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+}
+.cssload-up:after {
+  top: 29px;
+  left: 17px;
+  transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+}
+.cssload-innera {
+  position: relative;
+  top: 15px;
+  width: 29px;
+  height: 29px;
+  background: rgba(241, 15, 15, 0.43);
+  animation: cssload-mymove 2.3s infinite linear;
+  -o-animation: cssload-mymove 2.3s infinite linear;
+  -ms-animation: cssload-mymove 2.3s infinite linear;
+  -webkit-animation: cssload-mymove 2.3s infinite linear;
+  -moz-animation: cssload-mymove 2.3s infinite linear;
+}
+.cssload-down {
+  width: 29px;
+  height: 39px;
+  left: 24px;
+  top: 39px;
+  overflow: hidden;
+  background: rgb(204, 238, 255);
+  position: absolute;
+  z-index: 1;
+}
+.cssload-down:before,
+.cssload-down:after {
+  content: "";
+  width: 29px;
+  height: 39px;
+  background: rgb(241, 236, 236);
+  position: absolute;
+  z-index: 1;
+}
+.cssload-down:before {
+  top: -24px;
+  left: -17px;
+  transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+}
+.cssload-down:after {
+  top: -24px;
+  left: 23px;
+  transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+}
+.cssload-innerb {
+  position: relative;
+  top: 39px;
+  width: 29px;
+  height: 29px;
+  background: rgb(249, 0, 0);
+  animation: cssload-mymoveb 2.3s infinite linear;
+  -o-animation: cssload-mymoveb 2.3s infinite linear;
+  -ms-animation: cssload-mymoveb 2.3s infinite linear;
+  -webkit-animation: cssload-mymoveb 2.3s infinite linear;
+  -moz-animation: cssload-mymoveb 2.3s infinite linear;
+}
+
+@keyframes cssload-mymove {
+  0% {
+    top: 15px;
+  }
+  100% {
+    top: 44px;
+  }
+}
+
+@-o-keyframes cssload-mymove {
+  0% {
+    top: 15px;
+  }
+  100% {
+    top: 44px;
+  }
+}
+
+@-ms-keyframes cssload-mymove {
+  0% {
+    top: 15px;
+  }
+  100% {
+    top: 44px;
+  }
+}
+
+@-webkit-keyframes cssload-mymove {
+  0% {
+    top: 15px;
+  }
+  100% {
+    top: 44px;
+  }
+}
+
+@-moz-keyframes cssload-mymove {
+  0% {
+    top: 15px;
+  }
+  100% {
+    top: 44px;
+  }
+}
+
+@keyframes cssload-mymoveb {
+  0% {
+    top: 39px;
+  }
+  90% {
+    top: 19px;
+  }
+  100% {
+    top: -5px;
+  }
+}
+
+@-o-keyframes cssload-mymoveb {
+  0% {
+    top: 39px;
+  }
+  90% {
+    top: 19px;
+  }
+  100% {
+    top: -5px;
+  }
+}
+
+@-ms-keyframes cssload-mymoveb {
+  0% {
+    top: 39px;
+  }
+  90% {
+    top: 19px;
+  }
+  100% {
+    top: -5px;
+  }
+}
+
+@-webkit-keyframes cssload-mymoveb {
+  0% {
+    top: 39px;
+  }
+  90% {
+    top: 19px;
+  }
+  100% {
+    top: -5px;
+  }
+}
+
+@-moz-keyframes cssload-mymoveb {
+  0% {
+    top: 39px;
+  }
+  90% {
+    top: 19px;
+  }
+  100% {
+    top: -5px;
+  }
+}
+
+@keyframes cssload-rotates {
+  0% {
+    transform: rotate(0deg);
+  }
+  80% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+@-o-keyframes cssload-rotates {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+  80% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(180deg);
+  }
+}
+
+@-ms-keyframes cssload-rotates {
+  0% {
+    -ms-transform: rotate(0deg);
+  }
+  80% {
+    -ms-transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(180deg);
+  }
+}
+
+@-webkit-keyframes cssload-rotates {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  80% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(180deg);
+  }
+}
+
+@-moz-keyframes cssload-rotates {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  80% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(180deg);
+  }
+}

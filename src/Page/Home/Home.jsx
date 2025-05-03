@@ -12,6 +12,8 @@ import MeetOurDoctors from "./MeetOurDoctors";
 import OurServices from "./OurServices";
 import SuccessStories from "./SuccessStories";
 
+import SpinningMedicalCrossSpinner from "../Shared/MedicalCrossSpinner";
+
 const Home = () => {
   const [camps, loading] = useCamps();
   const popularCamps = camps
@@ -62,6 +64,8 @@ const Home = () => {
         <div className="pt-8">
           <OurServices></OurServices>
         </div>
+
+        <SpinningMedicalCrossSpinner></SpinningMedicalCrossSpinner>
 
         {/* Feedback Section */}
         <div className="pt-8">
