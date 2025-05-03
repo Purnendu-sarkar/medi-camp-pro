@@ -4,6 +4,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import SearchBar from "../Shared/SearchBar";
 import Pagination from "../Shared/Pagination";
+import MedicalCrossSpinner from "../Shared/MedicalCrossSpinner";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
@@ -28,12 +29,8 @@ const PaymentHistory = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <div
-          className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
-          role="status"
-        ></div>
-        <p className="ml-2 text-lg">Loading payment history...</p>
+      <div className="flex flex-col items-center justify-center h-screen">
+        <MedicalCrossSpinner />
       </div>
     );
   }

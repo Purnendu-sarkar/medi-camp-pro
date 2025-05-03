@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import SearchBar from "../Shared/SearchBar";
 import Pagination from "../Shared/Pagination";
+import MedicalCrossSpinner from "../Shared/MedicalCrossSpinner";
 
 const RegisteredCamps = () => {
   const [registeredCamps, isLoading, refetch] = useRegisteredCamps();
@@ -70,10 +71,8 @@ const RegisteredCamps = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <p className="text-lg font-semibold text-gray-600 animate-pulse">
-          Loading registered camps...
-        </p>
+      <div className="flex flex-col items-center justify-center h-screen">
+        <MedicalCrossSpinner />
       </div>
     );
   }

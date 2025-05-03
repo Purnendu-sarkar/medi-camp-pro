@@ -25,7 +25,7 @@ const Payment = () => {
     <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-blue-50 to-blue-200">
       <div className="w-full max-w-lg p-6 bg-white shadow-lg rounded-lg">
         <h1 className="text-2xl font-bold text-center mb-6 text-blue-700">
-          Checkout for {camp.campName}
+          Checkout for {camp?.campName}
         </h1>
         <Elements stripe={stripePromise}>
           <CheckoutForm camp={camp} />

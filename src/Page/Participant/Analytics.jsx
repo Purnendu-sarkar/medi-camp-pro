@@ -12,6 +12,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import MedicalCrossSpinner from "../Shared/MedicalCrossSpinner";
 
 const Analytics = () => {
   const { user } = useAuth();
@@ -33,11 +34,7 @@ const Analytics = () => {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center h-screen">
-        <div
-          className="spinner-border animate-spin inline-block w-12 h-12 border-4 border-blue-500 rounded-full"
-          role="status"
-        ></div>
-        <p className="mt-4 text-lg text-blue-500">Loading payment history...</p>
+        <MedicalCrossSpinner />
       </div>
     );
   }

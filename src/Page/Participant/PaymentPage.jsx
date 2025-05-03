@@ -26,12 +26,12 @@ const PaymentPage = () => {
         </h1>
         <div className="flex flex-col items-center gap-4 mb-6">
           <h2 className="text-2xl font-semibold text-gray-800">
-            {camp.campName}
+            {camp?.campName}
           </h2>
           <p className="text-lg font-medium text-gray-600">
             Fees:{" "}
             <span className="text-blue-500 font-bold">
-              ${camp.fees || "Free"}
+              ${camp?.fees || "Free"}
             </span>
           </p>
         </div>

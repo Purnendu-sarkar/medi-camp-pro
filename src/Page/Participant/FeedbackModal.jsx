@@ -61,7 +61,7 @@ const FeedbackModal = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-800 bg-opacity-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-lg">
         <h2 className="text-2xl font-bold mb-4 text-center">
-          Provide Feedback for {camp.campName}
+          Provide Feedback for {camp?.campName}
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -77,7 +77,7 @@ const FeedbackModal = () => {
               className="mt-1 p-2 w-full border rounded-md"
               min="1"
               max="5"
-              value={feedbackData.rating}
+              value={feedbackData?.rating}
               onChange={(e) =>
                 setFeedbackData({ ...feedbackData, rating: e.target.value })
               }
