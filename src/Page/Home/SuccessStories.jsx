@@ -54,10 +54,10 @@ const SuccessStories = () => {
     <>
       <div className="w-full md:w-11/12 mx-auto py-16 px-4 sm:px-6 lg:px-8 pt-8">
         <div className="w-full mx-auto">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 text-center mb-10">
+          <h1 className="text-4xl md:text-5xl font-extrabold  text-center mb-10">
             Success Stories
           </h1>
-          <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">
+          <p className="text-lg  text-center max-w-3xl mx-auto mb-12">
             Hear from participants who benefited from our medical camps.
           </p>
 
@@ -83,7 +83,7 @@ const SuccessStories = () => {
                     alt={story.name}
                     className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-blue-500"
                   />
-                  <h3 className="text-xl font-semibold mb-2">{story.name}</h3>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{story.name}</h3>
                   <p className="text-gray-600 italic">"{story.feedback}"</p>
                 </div>
               </SwiperSlide>

@@ -29,7 +29,7 @@ const Home = () => {
 
         {/* Popular Medical Camps Section */}
         <div className="w-full md:w-11/12 mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-          <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-12">
+          <h1 className="text-4xl font-extrabold text-center  mb-12">
             Popular Medical Camps
           </h1>
           {loading ? (
