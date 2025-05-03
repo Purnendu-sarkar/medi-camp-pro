@@ -11,8 +11,7 @@ import AboutUs from "./AboutUs";
 import MeetOurDoctors from "./MeetOurDoctors";
 import OurServices from "./OurServices";
 import SuccessStories from "./SuccessStories";
-
-import SpinningMedicalCrossSpinner from "../Shared/MedicalCrossSpinner";
+import MedicalCrossSpinner from "../Shared/MedicalCrossSpinner";
 
 const Home = () => {
   const [camps, loading] = useCamps();
@@ -35,9 +34,7 @@ const Home = () => {
             Popular Medical Camps
           </h1>
           {loading ? (
-            <div className="flex justify-center items-center h-40">
-              <div className="loader border-t-4 border-blue-500 w-16 h-16 rounded-full animate-spin"></div>
-            </div>
+            <MedicalCrossSpinner></MedicalCrossSpinner>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {popularCamps.map((camp) => (
@@ -65,7 +62,6 @@ const Home = () => {
           <OurServices></OurServices>
         </div>
 
-        <SpinningMedicalCrossSpinner></SpinningMedicalCrossSpinner>
 
         {/* Feedback Section */}
         <div className="pt-8">

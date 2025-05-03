@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import MedicalCrossSpinner from "../Shared/MedicalCrossSpinner";
 
 const MeetOurDoctors = () => {
+  const [loading, setLoading] = useState(true);
   const doctors = [
     {
       name: "Dr. Sarah Johnson",
@@ -19,6 +21,22 @@ const MeetOurDoctors = () => {
         "https://i.ibb.co.com/jvrQL7rK/images-q-tbn-ANd9-Gc-Qq06-Ea-ZZer-G8-n-HHvvk-UPG4euov-Fzj-BCLmtw-s.jpg",
     },
   ];
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <MedicalCrossSpinner />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full md:w-11/12 mx-auto px-4 sm:px-6 lg:px-8 pt-8">
