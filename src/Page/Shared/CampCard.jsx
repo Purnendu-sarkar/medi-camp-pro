@@ -57,7 +57,9 @@ const CampCard = ({ camp }) => {
           <User className="w-5 h-5 text-gray-500" />
           <span>
             <strong className="text-gray-600">Healthcare Professional:</strong>{" "}
-            {camp?.healthcareProfessional}
+            <span className="text-gray-800">
+              {camp?.healthcareProfessional}
+            </span>
           </span>
         </p>
 
@@ -66,7 +68,7 @@ const CampCard = ({ camp }) => {
           <UsersRound className="w-5 h-5 text-gray-500" />
           <span>
             <strong className="text-gray-600">Participant Count:</strong>{" "}
-            {camp?.participantCount}
+            <span className="text-gray-800">{camp?.participantCount}</span>
           </span>
         </p>
 
@@ -75,7 +77,7 @@ const CampCard = ({ camp }) => {
           <DollarSign className="w-5 h-5 text-gray-500" />
           <span>
             <strong className="text-gray-600">Fees:</strong>{" "}
-            {camp?.fees ? `$ ${camp.fees}` : "Free"}
+            <span className="text-gray-800">{camp?.fees ? `$ ${camp.fees}` : "Free"}</span>
           </span>
         </p>
 
