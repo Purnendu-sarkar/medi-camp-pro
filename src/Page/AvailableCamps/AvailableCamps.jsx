@@ -3,6 +3,7 @@ import { Search, LayoutGrid, Layout } from "lucide-react";
 import CampCard from "../Shared/CampCard";
 import useCamps from "../../hooks/useCamps";
 import { Helmet } from "react-helmet-async";
+import MedicalCrossSpinner from "../Shared/MedicalCrossSpinner";
 
 const AvailableCamps = () => {
   const [camps, loading] = useCamps();
@@ -90,9 +91,7 @@ const AvailableCamps = () => {
 
         {/* Camps Grid/List */}
         {loading ? (
-          <div className="flex justify-center items-center h-screen">
-            <div className="loader border-t-4 border-blue-500 w-24 h-24 rounded-full animate-spin"></div>
-          </div>
+          <MedicalCrossSpinner />
         ) : (
           <div
             className={`grid gap-6 ${

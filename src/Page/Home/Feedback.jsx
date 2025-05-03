@@ -4,6 +4,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { FaCampground, FaUser, FaQuoteLeft, FaStar } from "react-icons/fa";
 import "swiper/swiper-bundle.css";
 import useFeedbacks from "../../hooks/useFeedbacks";
+import MedicalCrossSpinner from "../Shared/MedicalCrossSpinner";
 
 const Feedback = () => {
   const { feedbacks, loading } = useFeedbacks();
@@ -20,9 +21,7 @@ const Feedback = () => {
       </h2>
 
       {loading ? (
-        <div className="flex justify-center items-center h-40">
-          <div className="loader border-t-4 border-blue-500 w-16 h-16 rounded-full animate-spin"></div>
-        </div>
+        <MedicalCrossSpinner />
       ) : feedbacks.length === 0 ? (
         <p className="text-center text-gray-600 mt-8">
           No feedbacks available at the moment.

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import useUpcomingCamps from "../../hooks/useUpcomingCamps";
 import moment from "moment";
 import { NavLink } from "react-router-dom";
+import MedicalCrossSpinner from "../Shared/MedicalCrossSpinner";
 
 const UpcomingCamps = () => {
   const { upcomingCamps, fetchUpcomingCamps, loading } = useUpcomingCamps();
@@ -17,9 +18,7 @@ const UpcomingCamps = () => {
       </h2>
 
       {loading ? (
-        <div className="flex justify-center items-center h-40">
-          <div className="loader border-t-4 border-green-500 border-t-transparent w-16 h-16 rounded-full animate-spin"></div>
-        </div>
+        <MedicalCrossSpinner />
       ) : upcomingCamps.length === 0 ? (
         <p className="text-center text-gray-700 mt-8 font-medium">
           No upcoming camps available at the moment. 🚫
