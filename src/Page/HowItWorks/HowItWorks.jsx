@@ -13,12 +13,12 @@ const HowItWorks = () => {
       <Helmet>
         <title>MediCamp | How It Works</title>
       </Helmet>
-      <div className="w-full bg-gray-100 min-h-screen py-16 px-6 lg:px-20">
+      <div className="w-full py-10 px-6 lg:px-20">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 text-center mb-10">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-10">
             How It Works
           </h1>
-          <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">
+          <p className="text-lg text-center max-w-3xl mx-auto mb-12">
             MediCamp makes it easy to find, join, and participate in medical
             camps. Follow these simple steps to get started!
           </p>
@@ -28,7 +28,9 @@ const HowItWorks = () => {
             {/* Step 1 */}
             <div className="bg-white shadow-lg rounded-xl p-6 text-center">
               <FaUserCheck className="text-5xl text-blue-500 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Step 1: Sign Up</h3>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                Step 1: Sign Up
+              </h3>
               <p className="text-gray-600">
                 Create an account easily using email or social login.
               </p>
@@ -37,7 +39,7 @@ const HowItWorks = () => {
             {/* Step 2 */}
             <div className="bg-white shadow-lg rounded-xl p-6 text-center">
               <FaHospitalUser className="text-5xl text-green-500 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
                 Step 2: Browse Camps
               </h3>
               <p className="text-gray-600">
@@ -48,7 +50,9 @@ const HowItWorks = () => {
             {/* Step 3 */}
             <div className="bg-white shadow-lg rounded-xl p-6 text-center">
               <FaClipboardList className="text-5xl text-yellow-500 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Step 3: Register</h3>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                Step 3: Register
+              </h3>
               <p className="text-gray-600">
                 Fill in your details and join a camp with just a few clicks.
               </p>
@@ -57,7 +61,7 @@ const HowItWorks = () => {
             {/* Step 4 */}
             <div className="bg-white shadow-lg rounded-xl p-6 text-center">
               <FaHeart className="text-5xl text-red-500 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
                 Step 4: Attend & Benefit
               </h3>
               <p className="text-gray-600">
@@ -67,7 +71,7 @@ const HowItWorks = () => {
           </div>
 
           {/* Additional Info Section */}
-          <div className="bg-white shadow-lg rounded-xl p-10 mt-16 text-center">
+          <div className="bg-white shadow-lg rounded-xl p-10 mt-10 text-center">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">
               Why Choose MediCamp?
             </h2>
