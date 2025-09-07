@@ -70,9 +70,51 @@ MediCamp is a Medical Camp Management System (MCMS) built with the MERN stack. I
 - 404 page for unmatched routes.
 - Customizable dashboard layouts for both organizers and participants.
 
-## Project Setup
 
-### Prerequisites
+## 📦 Setup Instructions
 
-- Node.js (v18+)
+## Prerequisites
+- Node.js (v16 or higher)
+- npm 
+- Git
 - MongoDB
+
+### 🔧 Installation
+1. **Clone the Repository**
+
+   ```bash
+   git clone <repository-url>
+   cd medi-camp-pro
+
+2. **Install Dependencies:**
+
+   ```bash
+   npm install
+3. **Set Up Environment Variables:
+Create a `.env` file in the project root and add the following variables:**
+
+   ```bash
+   VITE_API_URL=your_backend_api_url
+   VITE_FIREBASE_API_KEY=your_firebase_api_key
+   VITE_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+   VITE_FIREBASE_PROJECT_ID=your_project_id
+   VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   VITE_FIREBASE_APP_ID=your_app_id
+   VITE_STRIPE_PUBLIC_KEY=your_stripe_public_key
+
+    ```
+
+4. **Run the Application:**
+
+   ```bash
+   npm run dev
+   ````
+
+5. **Build for Production:**
+
+   ```bash
+   npm run build
+   ```
+
+
